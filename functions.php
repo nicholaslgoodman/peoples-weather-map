@@ -118,6 +118,15 @@ function pwmap_scripts() {
 add_action( 'wp_enqueue_scripts', 'pwmap_scripts' );
 
 /**
+ * Register taxonomies.
+ */
+function register_taxonomies()
+{
+	locate_template( array( 'taxonomies.php' ), true, true );
+}
+add_action( 'after_setup_theme', 'register_taxonomies');
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
@@ -141,3 +150,5 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+
