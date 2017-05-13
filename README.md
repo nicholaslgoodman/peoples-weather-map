@@ -1,7 +1,7 @@
-People's Weather Map
-===
+Peoples' Weather Map
+====================
 
-PWM is a theme for the Peoples Weather Map project at the University of Iowa.
+PWM is a theme for the Peoples' Weather Map project at the University of Iowa.
 
 Installation Instructions
 --------------------------
