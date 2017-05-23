@@ -1,0 +1,51 @@
+body {
+    background-color: $tan_light;
+    color: $dark;
+}
+
+main {
+    width:100%;
+}
+
+@media #{$breakpoint-lg} {
+    main {
+        padding-left: 300px;
+    }
+}
+
+.wrapper {
+    max-width: 1000px;
+    padding: 1rem;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+}
+
+.svg-map path {
+    fill: white;
+    stroke: black;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+}
+
+.map-bg {
+    background: $tan_light url(../img/bg@2x.jpg) no-repeat center top;
+    background-size: 100% auto;
+}
+
+.chosen-container {
+    width: 100%!important;
+}
+
+footer {
+    background-color: $dark;
+    color: #fff;
+    text-align: right;
+}
+
+.pwm-box {
+    border: 1px solid $linework;
+    background-color: $tan_dark;
+    padding: 1rem;
+    border-radius: 2px;
+}

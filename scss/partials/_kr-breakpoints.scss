@@ -1,0 +1,21 @@
+//presupposes 16px base unit
+
+$breakpoint-sm-only: 'screen and (max-width: 37.45em)' !default;  // 599 and below
+$breakpoint-md-only: 'screen and (min-width: 37.45em) and (max-width: 56.25em)' !default; // 480 - 960
+
+$breakpoint-md: 'screen and (min-width: 37.5em)' !default; // 600 and up
+$breakpoint-lg: 'screen and (min-width: 56.25em)' !default; // 900 and up
+$breakpoint-xlg: 'screen and (min-width: 75em)' !default; // 1200 and up
+
+
+//EXAMPLE:
+//@media #{$breakpoint-medium} {
+//    content
+//}
+
+
+
+// LEGACY TACHYONS
+$breakpoint-not-small: 'screen and (min-width: 37.45em)' !default;
+$breakpoint-medium: 'screen and (min-width: 37.45em) and (max-width: 56.25em)' !default;
+$breakpoint-large: 'screen and (min-width: 56.25em)' !default;

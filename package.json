@@ -1,0 +1,25 @@
+{
+  "name": "peoples-weather-map",
+  "version": "1.0.0",
+  "description": "Peoples' Weather Map ====================",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholaslgoodman/peoples-weather-map.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicholaslgoodman/peoples-weather-map/issues"
+  },
+  "homepage": "https://github.com/nicholaslgoodman/peoples-weather-map#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0"
+  }
+}

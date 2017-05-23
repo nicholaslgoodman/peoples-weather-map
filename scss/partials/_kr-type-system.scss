@@ -1,0 +1,228 @@
+/** TYPE SYSTEM 
+
+
+    this is based on an 8px baseline scale
+
+    the lynchpin (body copy) size is 16px == 1rem
+
+
+**/
+
+
+$baseline_scale: 8;
+$baseline_font_size: 16px;
+$main_sans_serif: 'Lato';
+$main_serif: 'Lora';
+
+
+@function calculateRem($size) {
+  $remSize: $size / $baseline_font_size;
+  @return $remSize * 1rem;
+}
+
+
+@mixin font($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+
+/***** SET YOUR MAIN FONTS HERE ***********/
+@mixin serif(){
+    font-family: $main_serif,georgia, serif;
+}
+
+@mixin sans_serif(){
+    font-family: $main_sans_serif,"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+body {
+    font-family: $main_sans_serif,helvetica,sans-serif;
+}
+
+
+h1, .f1, .f-headline {
+    @include font($baseline_font_size * 3.157);
+    margin-bottom: 1rem;
+    margin-top: 0;
+    line-height: 3.5rem;
+    @include serif();
+}
+
+.f-headline {
+        max-width: 620px;
+    margin-left:auto;
+    margin-right: auto;
+    letter-spacing: .05rem;
+}
+
+.f-subheadline {
+    @include font($baseline_font_size * 1.333);
+    max-width: 620px;
+    margin-left:auto;
+    margin-right: auto;
+    letter-spacing: .05rem;
+}
+
+h2, .f2 {
+    @include font($baseline_font_size * 2.369);
+    margin-bottom: 1rem;
+    margin-top: 0;
+    line-height: 2.5rem;
+    @include serif();
+}
+
+h3, .f3 {
+    @include font($baseline_font_size * 1.777);
+    margin-bottom: 1rem;
+    margin-top: 0;
+    line-height: 2rem;
+    @include serif();
+}
+
+.f3-alt {
+    @include font($baseline_font_size * 1.333);
+    margin-bottom: 1rem;
+    margin-top: 0;
+    line-height: 1.5rem;
+    @include serif();
+}
+
+h4, .f4 {
+    @include font($baseline_font_size * 1.333);
+    margin-bottom: 1rem;
+    margin-top: 0;
+    line-height: 1.5rem;
+    @include sans_serif();
+}
+
+p, h5, .f-base, .f5 {
+    @include font($baseline_font_size);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    @include serif();
+}
+h5, .f5 {
+    line-height: 1.25;
+    margin-bottom: .25rem;
+    @include sans_serif();
+    font-weight: bold;
+}
+
+h6, .f-small {
+    @include font($baseline_font_size * 0.75);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    @include sans_serif();
+}
+
+
+@media (max-width: 767px) {
+    .f-headline {
+        @include font($baseline_font_size * 1.777);
+        line-height: 2.2rem;
+        text-align: center;
+    }
+    
+    .f-subheadline {
+        @include font($baseline_font_size * 1);
+        line-height: 1.4rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    
+    
+    .f3-s {
+        @include font($baseline_font_size * 1.777);
+        margin-bottom: 1rem;
+        margin-top: 0;
+        line-height: 2rem;
+        @include sans_serif();
+    }
+    .f4-s {
+        @include font($baseline_font_size * 1.333);
+        margin-bottom: 1rem;
+        margin-top: 0;
+        line-height: 1.5rem;
+        @include sans_serif();
+    }
+    .f-base-s {
+        @include font($baseline_font_size);
+        line-height: 1.5;
+        margin-bottom: 1rem;
+        margin-top: 0;
+        @include serif();
+    }
+}
+
+@media (min-width: 768px) and (max-width: 960px) {
+    .f3-m {
+        @include font($baseline_font_size * 1.777);
+        margin-bottom: 1rem;
+        margin-top: 0;
+        line-height: 2rem;
+        @include sans_serif();
+    }
+    .f4-m {
+        @include font($baseline_font_size * 1.333);
+        margin-bottom: 1rem;
+        margin-top: 0;
+        line-height: 1.5rem;
+        @include sans_serif();
+    }
+}
+
+@media (min-width: 960px) {
+    .f2-l {
+        @include font($baseline_font_size * 2.369);
+        margin-bottom: 1rem;
+        margin-top: 0;
+        line-height: 2.5rem;
+        @include serif();
+    }
+    .f3-l {
+        @include font($baseline_font_size * 1.777);
+        margin-bottom: 1rem;
+        margin-top: 0;
+        line-height: 2rem;
+        @include sans_serif();
+    }
+    .f4-l {
+        @include font($baseline_font_size * 1.333);
+        margin-bottom: 1rem;
+        margin-top: 0;
+        line-height: 1.5rem;
+        @include sans_serif();
+    }
+}
+
+
+.serif {
+    @include serif;
+}
+
+.sans-serif {
+    @include sans_serif;
+}
+
+.f-dark {
+    color:$dark;
+}
+
+.f-tan-light {
+    color: $tan_light;
+}
+
+.f-tan-dark {
+    color: $tan_dark;
+}
+
+.f-accent {
+    color: $accent;
+}
+
