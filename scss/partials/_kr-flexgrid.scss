@@ -1,0 +1,134 @@
+.flex-row {
+    display: flex;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+.flex-row > * {
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.flex-content {
+    padding: 0.5rem;
+}
+    
+[class^=col] {
+    position: relative;
+}
+
+.col-sm-100 {
+    flex-basis: calc(100% - 1rem);
+    max-width: calc(100% - 1rem);
+}
+
+.col-sm-66 {
+    flex-basis: calc(66.66% - 1rem);
+    max-width: calc(66.66% - 1rem);
+}
+
+.col-sm-50 {
+    flex-basis: calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+}
+
+.col-sm-33 {
+    flex-basis: calc(33.33% - 1rem);
+    max-width: calc(33.33% - 1rem);
+}
+
+@media (min-width: 768px) {
+    .col-md-100 {
+        flex-basis: calc(100% - 1rem);
+        max-width: calc(100% - 1rem);
+    }
+
+    .col-md-66 {
+        flex-basis: calc(66.66% - 1rem);
+        max-width: calc(66.66% - 1rem);
+    }
+
+    .col-md-50 {
+        flex-basis: calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+    }
+
+    .col-md-33 {
+        flex-basis: calc(33.33% - 1rem);
+        max-width: calc(33.33% - 1rem);
+    }
+
+}
+    
+@media (min-width: 960px) {
+    .col-lg-100 {
+        flex-basis: calc(100% - 1rem);
+        max-width: calc(100% - 1rem);
+    }
+
+    .col-lg-66 {
+        flex-basis: calc(66.66% - 1rem);
+        max-width: calc(66.66% - 1rem);
+    }
+
+    .col-lg-50 {
+        flex-basis: calc(50% - 1rem);
+        max-width: calc(50% - 1rem);
+    }
+
+    .col-lg-33 {
+        flex-basis: calc(33.33% - 1rem);
+        max-width: calc(33.33% - 1rem);
+    }
+    
+    .col-lg-16 {
+        flex-basis: calc(16.66% - 1rem);
+        max-width: calc(16.66% - 1rem);
+    }
+
+}
+
+.gutterless {
+        
+    &.flex-row {
+        margin:0;
+    }
+
+    &.flex-row > * {
+        margin-left:0;
+        margin-right: 0;
+    }
+    
+    .col-sm-100 {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .col-sm-66 {
+        flex-basis: 66.66%;
+        max-width: 66.66%;
+    }
+
+    .col-sm-50 {
+        flex-basis: 50%;
+        max-width: 50%;
+    }
+
+    .col-sm-33 {
+        flex-basis: 33.33%;
+        max-width: 33.33%;
+    }
+    
+    .col-sm-16 {
+        flex-basis: 16.66%;
+        max-width: 16.66%;
+    }
+    
+}
+

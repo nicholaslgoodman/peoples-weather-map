@@ -1,0 +1,18 @@
+.media-obj {
+  display: flex;
+  align-items: flex-start;
+}
+
+.media-obj--center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.media-obj--figure {
+  margin-right: 1em;
+}
+
+.media-obj--body {
+  flex: 1;
+}

@@ -1,0 +1,15 @@
+.btn {
+    display: inline-block;
+    border-radius: 2px;
+    padding: .5rem 1rem;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: $accent;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: $accent_hover;
+}

@@ -1,0 +1,33 @@
+.hamburger, .close-x { cursor: pointer; padding: 10px 35px 16px 0px; }
+.hamburger span, .hamburger span:before, .hamburger span:after, .close-x span, .close-x span:before, .close-x span:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 5px;
+  width: 35px;
+  background: #000;
+  position: absolute;
+  display: block;
+  content: '';
+}
+.hamburger span:before, .close-x span:before {
+  top: -10px; 
+}
+.hamburger span:after, .close-x span:after {
+  bottom: -10px;
+}
+
+.hamburger span, .hamburger span:before, .hamburger span:after {
+  transition: all 200ms ease-in-out;
+}
+.hamburger.active span, .close-x span {
+  background-color: transparent;
+}
+.hamburger.active span:before, .hamburger.active span:after, .close-x span:before, .close-x span:after {
+  top: 0;
+}
+.hamburger.active span:before, .close-x span:before {
+  transform: rotate(45deg);
+}
+.hamburger.active span:after, .close-x span:after {
+  transform: rotate(-45deg);
+}
