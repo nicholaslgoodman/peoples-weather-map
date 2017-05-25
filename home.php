@@ -40,7 +40,7 @@
                                         <h3 class="f5">Select a county</h3>
                                         <select class="county-search input-reset" data-placeholder="Select a county" style="width:100%;">
                                             <option></option>
-                                            <option value="linn">Linn</option>
+                                            <option value="linn">Linn (7)</option>
                                             <option value="black-hawk">Black Hawk</option>
                                             <option value="cedar">Cedar</option>
                                         </select>

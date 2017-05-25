@@ -1,0 +1,48 @@
+.article-page {
+    padding-top: 1rem;
+    
+    h1 {
+        text-align: center;
+        margin-bottom: .5rem;
+    }
+    h2 {
+        font-weight: normal;
+        color: $accent;
+        text-align: center;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid $tan_dark;
+        margin-bottom: 2rem
+    }
+    .date {
+        color: #fff;
+        background-color: $dark;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        margin-left: 5px;
+        text-align: center;
+        border-radius: 100%;
+        display: inline-block;
+        z-index: 99;
+        position: relative;
+        font-size: 12/$baseline_divisor * 1rem;
+    }
+    .date:after {
+        content: '';
+        display: block;
+        width: 17px;
+        height: 33px;
+        background: url(../img/pin.png) no-repeat 0 0;
+        position: absolute;
+        top:3px;
+        left: 50%;
+        background-size: 100%;
+        margin-top: -18px;
+        margin-left: -3px;
+    }
+    .date-wrap {
+        text-align: center;
+        margin-bottom: .5rem;
+    }
+    
+}

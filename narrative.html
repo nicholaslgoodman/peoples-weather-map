@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<title>People&#039;s Weather Map &#8211; Just another WordPress site</title>
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="People&#039;s Weather Map &raquo; Feed" href="http://localhost:8888/pwm/feed/" />
+<link rel="alternate" type="application/rss+xml" title="People&#039;s Weather Map &raquo; Comments Feed" href="http://localhost:8888/pwm/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/localhost:8888\/pwm\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.5"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='popup-maker-site-css'  href='http://localhost:8888/pwm/wp-content/plugins/popup-maker/assets/css/site.min.css?ver=1.6.3' type='text/css' media='all' />
+<link rel='stylesheet' id='pwmap-style-css'  href='http://localhost:8888/pwm/wp-content/themes/peoples-weather-map/style.css?ver=4.7.5' type='text/css' media='all' />
+<script type='text/javascript' src='http://localhost:8888/pwm/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://localhost:8888/pwm/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='http://localhost:8888/pwm/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://localhost:8888/pwm/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://localhost:8888/pwm/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.7.5" />
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+			<style id="pum-styles" type="text/css">
+	/* Popup Google Fonts */
+@import url('//fonts.googleapis.com/css?family=Acme|Montserrat');
+
+/* Popup Theme 26: Framed Border */
+.popmake-overlay.theme-26, .popmake-overlay.theme-framed-border { background-color: rgba( 255, 255, 255, 0.5 ) } 
+.popmake.theme-26, .popmake.theme-framed-border { padding: 18px; border-radius: 0px; border: 20px outset #dd3333; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.97 ) inset; background-color: rgba( 255, 251, 239, 1 ) } 
+.popmake.theme-26 .popmake-title, .popmake.theme-framed-border .popmake-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-size: 32px; line-height: 36px } 
+.popmake.theme-26 .popmake-content, .popmake.theme-framed-border .popmake-content { color: #2d2d2d; font-family: inherit } 
+.popmake.theme-26 > .popmake-close, .popmake.theme-framed-border > .popmake-close { height: 20px; width: 20px; left: auto; right: -20px; bottom: auto; top: -20px; padding: 0px; color: #ffffff; font-family: Acme; font-size: 20px; line-height: 20px; border: 1px none #ffffff; border-radius: 0px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 0, 0, 0.55 ) } 
+
+/* Popup Theme 25: Cutting Edge */
+.popmake-overlay.theme-25, .popmake-overlay.theme-cutting-edge { background-color: rgba( 0, 0, 0, 0.5 ) } 
+.popmake.theme-25, .popmake.theme-cutting-edge { padding: 18px; border-radius: 0px; border: 1px none #000000; box-shadow: 0px 10px 25px 0px rgba( 2, 2, 2, 0.5 ); background-color: rgba( 30, 115, 190, 1 ) } 
+.popmake.theme-25 .popmake-title, .popmake.theme-cutting-edge .popmake-title { color: #ffffff; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: Sans-Serif; font-size: 26px; line-height: 28px } 
+.popmake.theme-25 .popmake-content, .popmake.theme-cutting-edge .popmake-content { color: #ffffff; font-family: inherit } 
+.popmake.theme-25 > .popmake-close, .popmake.theme-cutting-edge > .popmake-close { height: 24px; width: 24px; left: auto; right: 0px; bottom: auto; top: 0px; padding: 0px; color: #1e73be; font-family: inherit; font-size: 32px; line-height: 24px; border: 1px none #ffffff; border-radius: 0px; box-shadow: -1px 1px 1px 0px rgba( 2, 2, 2, 0.1 ); text-shadow: -1px 1px 1px rgba( 0, 0, 0, 0.1 ); background-color: rgba( 238, 238, 34, 1 ) } 
+
+/* Popup Theme 24: Hello Box */
+.popmake-overlay.theme-24, .popmake-overlay.theme-hello-box { background-color: rgba( 0, 0, 0, 0.75 ) } 
+.popmake.theme-24, .popmake.theme-hello-box { padding: 30px; border-radius: 80px; border: 14px solid #81d742; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0 ); background-color: rgba( 255, 255, 255, 1 ) } 
+.popmake.theme-24 .popmake-title, .popmake.theme-hello-box .popmake-title { color: #2d2d2d; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: Montserrat; font-size: 32px; line-height: 36px } 
+.popmake.theme-24 .popmake-content, .popmake.theme-hello-box .popmake-content { color: #2d2d2d; font-family: inherit } 
+.popmake.theme-24 > .popmake-close, .popmake.theme-hello-box > .popmake-close { height: auto; width: auto; left: auto; right: -30px; bottom: auto; top: -30px; padding: 0px; color: #2d2d2d; font-family: inherit; font-size: 32px; line-height: 28px; border: 1px none #ffffff; border-radius: 28px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 255, 255, 255, 1 ) } 
+
+/* Popup Theme 23: Enterprise Blue */
+.popmake-overlay.theme-23, .popmake-overlay.theme-enterprise-blue { background-color: rgba( 0, 0, 0, 0.7 ) } 
+.popmake.theme-23, .popmake.theme-enterprise-blue { padding: 28px; border-radius: 5px; border: 1px none #000000; box-shadow: 0px 10px 25px 4px rgba( 2, 2, 2, 0.5 ); background-color: rgba( 255, 255, 255, 1 ) } 
+.popmake.theme-23 .popmake-title, .popmake.theme-enterprise-blue .popmake-title { color: #315b7c; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-size: 34px; line-height: 36px } 
+.popmake.theme-23 .popmake-content, .popmake.theme-enterprise-blue .popmake-content { color: #2d2d2d; font-family: inherit } 
+.popmake.theme-23 > .popmake-close, .popmake.theme-enterprise-blue > .popmake-close { height: 28px; width: 28px; left: auto; right: 8px; bottom: auto; top: 8px; padding: 4px; color: #ffffff; font-family: inherit; font-size: 20px; line-height: 20px; border: 1px none #ffffff; border-radius: 42px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 49, 91, 124, 1 ) } 
+
+/* Popup Theme 22: Light Box */
+.popmake-overlay.theme-22, .popmake-overlay.theme-lightbox { background-color: rgba( 0, 0, 0, 0.6 ) } 
+.popmake.theme-22, .popmake.theme-lightbox { padding: 18px; border-radius: 3px; border: 8px solid #000000; box-shadow: 0px 0px 30px 0px rgba( 2, 2, 2, 1 ); background-color: rgba( 255, 255, 255, 1 ) } 
+.popmake.theme-22 .popmake-title, .popmake.theme-lightbox .popmake-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-size: 32px; line-height: 36px } 
+.popmake.theme-22 .popmake-content, .popmake.theme-lightbox .popmake-content { color: #000000; font-family: inherit } 
+.popmake.theme-22 > .popmake-close, .popmake.theme-lightbox > .popmake-close { height: 30px; width: 30px; left: auto; right: -24px; bottom: auto; top: -24px; padding: 0px; color: #ffffff; font-family: inherit; font-size: 24px; line-height: 26px; border: 2px solid #ffffff; border-radius: 30px; box-shadow: 0px 0px 15px 1px rgba( 2, 2, 2, 0.75 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 0, 0, 1 ) } 
+
+/* Popup Theme 21: Default Theme */
+.popmake-overlay.theme-21, .popmake-overlay.theme-default-theme { background-color: rgba( 255, 255, 255, 1 ) } 
+.popmake.theme-21, .popmake.theme-default-theme { padding: 18px; border-radius: 0px; border: 1px none #000000; box-shadow: 1px 1px 3px 0px rgba( 2, 2, 2, 0.23 ); background-color: rgba( 249, 249, 249, 1 ) } 
+.popmake.theme-21 .popmake-title, .popmake.theme-default-theme .popmake-title { color: #000000; text-align: left; text-shadow: 0px 0px 0px rgba( 2, 2, 2, 0.23 ); font-family: inherit; font-weight: inherit; font-size: 32px; font-style: normal; line-height: 36px } 
+.popmake.theme-21 .popmake-content, .popmake.theme-default-theme .popmake-content { color: #8c8c8c; font-family: inherit; font-weight: inherit; font-style: normal } 
+.popmake.theme-21 > .popmake-close, .popmake.theme-default-theme > .popmake-close { height: auto; width: auto; left: auto; right: 0px; bottom: auto; top: 0px; padding: 8px; color: #ffffff; font-family: inherit; font-weight: inherit; font-size: 12px; font-style: normal; line-height: 14px; border: 1px none #ffffff; border-radius: 0px; box-shadow: 0px 0px 0px 0px rgba( 2, 2, 2, 0.23 ); text-shadow: 0px 0px 0px rgba( 0, 0, 0, 0.23 ); background-color: rgba( 0, 183, 205, 1 ) } 
+
+
+	
+		</style>    
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700|Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost:8888/pwm/wp-content/themes/peoples-weather-map/css/lib/chosen.css">
+    <link rel="stylesheet" href="http://localhost:8888/pwm/wp-content/themes/peoples-weather-map/css/styles.css">
+</head>
+
+<body class="home blog logged-in group-blog hfeed">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	
+   <header class="fixed-ns relative-m">
+            <svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                    <symbol id="icon--home" viewBox="0 0 25 25">
+                        <path d="M12.62,2.5a.67.67,0,0,0-.37.13L.37,12a.65.65,0,0,0-.11.89.66.66,0,0,0,.89.1L12.64,3.93,24.12,13a.63.63,0,0,0,.78-1L13,2.63A.71.71,0,0,0,12.62,2.5ZM4.83,10.91l-1.25,1v10a.63.63,0,0,0,.63.63h5.94a.63.63,0,0,0,.63-.63V16.25h3.75v5.63a.63.63,0,0,0,.63.63h5.94a.63.63,0,0,0,.63-.63v-10l-1.25-1V21.25H15.76V15.63a.63.63,0,0,0-.63-.63h-5a.63.63,0,0,0-.63.63v5.63H4.83Z"/>
+                    </symbol>
+                    <symbol id="icon--stories" viewBox="0 0 25 25">
+                        <path d="M12.82,20l-.48-.15a19.29,19.29,0,0,0-5.26-.69,19,19,0,0,0-5.17.7L1.45,20V4.73l.2-.1A12.3,12.3,0,0,1,7,3.54a15.67,15.67,0,0,1,5.62,1.07l.24.09V20ZM2.19,5.19V19.05a19.85,19.85,0,0,1,4.9-.6,20.87,20.87,0,0,1,5,.59V5.21A14.88,14.88,0,0,0,7,4.27,12.31,12.31,0,0,0,2.19,5.19Z"/><path d="M12.09,20V4.7l.24-.09a15.67,15.67,0,0,1,5.62-1.07,12.28,12.28,0,0,1,5.32,1.09l.2.1V20L23,19.89a19,19,0,0,0-5.17-.7,19.19,19.19,0,0,0-5.26.69Zm5.74-1.58a19.86,19.86,0,0,1,4.9.6V5.19a12.31,12.31,0,0,0-4.79-.91,14.87,14.87,0,0,0-5.12.93V19A20.87,20.87,0,0,1,17.83,18.46Z"/><polygon points="25 21.46 0 21.46 0 5.59 1.82 5.59 1.82 6.32 0.74 6.32 0.74 20.73 24.26 20.73 24.26 6.69 23.1 6.69 23.1 5.95 25 5.95 25 21.46"/><rect x="12.09" y="19.53" width="0.74" height="1.56"/>
+                    </symbol>
+                    <symbol id="icon--hazards" viewBox="0 0 25 25">
+                        <path d="M19.08,19.53a.48.48,0,0,1,0-1,5,5,0,0,0,5-5,5.09,5.09,0,0,0-2.1-4.08.48.48,0,0,1-.19-.38v-.4A6.39,6.39,0,0,0,9,8.75a7.18,7.18,0,0,0,.27,1.88.48.48,0,0,1-.8.47,4.38,4.38,0,1,0-3.09,7.48.48.48,0,1,1,0,1,5.35,5.35,0,0,1,0-10.69,5.28,5.28,0,0,1,2.72.75,7.35,7.35,0,1,1,14.65-.84v.17A6,6,0,0,1,25,13.62,5.92,5.92,0,0,1,19.08,19.53Z"/><path d="M10.78,23.48a.48.48,0,0,1-.38-.78l2.16-2.78L11.32,20a.44.44,0,0,1-.45-.25.48.48,0,0,1,0-.51l1.83-2.58a.48.48,0,1,1,.78.56L12.26,19l1.3-.06a.44.44,0,0,1,.45.26.48.48,0,0,1,0,.52l-2.8,3.61A.48.48,0,0,1,10.78,23.48Z"/><path d="M16.28,19.59a.48.48,0,0,1-.43-.69l1-2a.48.48,0,0,1,.87.42l-1,2A.48.48,0,0,1,16.28,19.59Z"/><path class="cls-1" d="M8.27,19.59a.48.48,0,0,1-.43-.69l1-2a.48.48,0,0,1,.87.42l-1,2A.48.48,0,0,1,8.27,19.59Z"/><path d="M14.56,23.6a.48.48,0,0,1-.43-.69l1-2a.48.48,0,1,1,.87.42l-1,2A.48.48,0,0,1,14.56,23.6Z"/><path d="M6.55,23.6a.48.48,0,0,1-.43-.69l1-2a.48.48,0,1,1,.87.42l-1,2A.48.48,0,0,1,6.55,23.6Z"/><path d="M2.06,11.41a5.86,5.86,0,0,1-2-3.49.48.48,0,0,1,.16-.45.48.48,0,0,1,.47-.09,3.13,3.13,0,0,0,.94.15A3.49,3.49,0,0,0,5.15,4a3.78,3.78,0,0,0-.51-1.83.48.48,0,0,1,.27-.69,2.32,2.32,0,0,1,.72-.08A5.63,5.63,0,0,1,10.7,4.53L9.84,5a4.61,4.61,0,0,0-4-2.59A4.41,4.41,0,0,1,6.11,4,4.44,4.44,0,0,1,1.63,8.49l-.43,0a4.79,4.79,0,0,0,1.48,2.21Z"/>
+                    </symbol>
+                    <symbol id="icon--climate" viewBox="0 0 25 25">
+                        <path d="M23.5,20.3h-.23v.41h-4V20.3h-.23v.41h-4V20.3h-.23v.41h-4V20.3h-.24v.41h-4V20.3H6.49v.41H5.24a2.79,2.79,0,0,0-.55-3.39l3.73-2.14a.56.56,0,0,0,.66,0l3.9,2.2s0,0,0,0A.57.57,0,1,0,14,17l1.83-4.51a.57.57,0,0,0,.44-.26l1.76.47,1.17,2.52a.57.57,0,1,0,.81,0l.54-1.85,2,.53a.57.57,0,0,0,1.12-.13.56.56,0,0,0-.12-.35L25,10.91l-.13-.7-1.81,3.05h0a.57.57,0,0,0-.46.24L20.64,13l2.24-7.63-.32-.48-2.37,8-1.87-.5L15.93,7.19a.57.57,0,1,0-1-.3.56.56,0,0,0,.14.37l-2.58,5.43h0a.56.56,0,0,0-.25.06L9.28,10a.56.56,0,0,0,0-.18.57.57,0,1,0-1.13,0,.56.56,0,0,0,.07.27l-3.79,5V4.51a1.67,1.67,0,1,0-3.35,0V17.14A2.79,2.79,0,1,0,5,21H6.49v.34h.23V21h4v.34h.24V21h4v.34h.24V21h4v.34h.23V21h4v.34h.23V21H25v-.31H23.5Zm-3.45-7L19.55,15l-1-2.1ZM4.47,15.78l0,0,4.12-5.43h.12a.57.57,0,0,0,.21,0l2.9,2.75a.57.57,0,1,0,1-.2l2.59-5.45h.09l2.2,4.74-1.44-.39a.57.57,0,1,0-.94.57l-1.83,4.49a.56.56,0,0,0-.32.12L9.31,14.78a.44.44,0,0,0,0,0,.57.57,0,1,0-1.13,0s0,0,0,.05L4.47,16.92ZM2.79,21.42a2,2,0,0,1-.93-3.87v-13a.93.93,0,1,1,1.86,0v13a2,2,0,0,1-.93,3.87Z"/><path d="M4.32,19.4A1.53,1.53,0,1,1,2.26,18V10.32H3.32V18A1.52,1.52,0,0,1,4.32,19.4Z"/>
+                    </symbol>
+                    <symbol id="icon--about" viewBox="0 0 25 25">
+                        <path d="M20.19,12.07A3.09,3.09,0,1,0,17.1,9,3.09,3.09,0,0,0,20.19,12.07Zm0-5.36A2.27,2.27,0,1,1,17.93,9,2.27,2.27,0,0,1,20.19,6.72Z"/><path d="M4.81,12.07A3.09,3.09,0,1,0,1.72,9,3.09,3.09,0,0,0,4.81,12.07Zm0-5.36A2.27,2.27,0,1,1,2.54,9,2.27,2.27,0,0,1,4.81,6.72Z"/><path d="M25,15.09a2.06,2.06,0,0,0-1.51-2,15.39,15.39,0,0,0-3.64-.35v.82h.35a14.5,14.5,0,0,1,3.11.33A1.24,1.24,0,0,1,24.17,15q-.1,1.4-.21,2.87a2.31,2.31,0,0,1-1.69,2,14.51,14.51,0,0,1-4.16,0,1.52,1.52,0,0,1-.38-.12A3.91,3.91,0,0,0,18.38,18c.08-1.08.15-2.14.23-3.19l0-.56a2.56,2.56,0,0,0-1.87-2.51,20.08,20.08,0,0,0-8.56,0A2.42,2.42,0,0,0,7,12.52a2.46,2.46,0,0,0-.61,1.71l0,.55c.08,1,.15,2.11.23,3.19a3.9,3.9,0,0,0,.64,1.83,1.53,1.53,0,0,1-.37.12,14.51,14.51,0,0,1-4.16,0,2.31,2.31,0,0,1-1.7-2C1,16.93.89,16,.83,15a1.24,1.24,0,0,1,.86-1.17,14.57,14.57,0,0,1,3.12-.34h.34v-.82a15.44,15.44,0,0,0-3.65.35,2.06,2.06,0,0,0-1.5,2Q.11,16.5.21,18A3.11,3.11,0,0,0,2.6,20.72a15.36,15.36,0,0,0,4.41,0H7a2.43,2.43,0,0,0,.77-.28,3.45,3.45,0,0,0,1.85,1,19.85,19.85,0,0,0,2.86.21,19.94,19.94,0,0,0,2.86-.21h0a3.43,3.43,0,0,0,1.84-1,2.46,2.46,0,0,0,.78.28,15.36,15.36,0,0,0,4.41,0h0A3.11,3.11,0,0,0,24.79,18Q24.89,16.5,25,15.09Zm-9.76,5.55a19.1,19.1,0,0,1-5.47,0A3.11,3.11,0,0,1,7.45,17.9c-.09-1.27-.18-2.52-.27-3.74A1.74,1.74,0,0,1,8.4,12.51a19.24,19.24,0,0,1,8.19,0,1.74,1.74,0,0,1,1.24,1.65q-.14,1.83-.27,3.74A3.11,3.11,0,0,1,15.24,20.65Z"/><path d="M12.5,10.66A3.67,3.67,0,1,0,8.83,7,3.67,3.67,0,0,0,12.5,10.66Zm0-6.51A2.84,2.84,0,1,1,9.66,7,2.84,2.84,0,0,1,12.5,4.16Z"/>
+                    </symbol>
+                    <symbol id="icon--involved" viewBox="0 0 25 25">
+                        <path d="M0,11.34V23a.91.91,0,0,0,.87.87H24.13A.91.91,0,0,0,25,23V11.34a.91.91,0,0,0-.87-.87H20.07a.87.87,0,1,0,0,1.74h3.19v9.88H1.74V12.21H4.93a.87.87,0,1,0,0-1.74H.87A.92.92,0,0,0,0,11.34Z"/><path d="M12.5,1.16a1,1,0,0,0-.6.24L7,6.05a1,1,0,0,0-.07,1.27.91.91,0,0,0,1.27,0L11.63,4V18.9a.87.87,0,0,0,1.74,0V4l3.47,3.27a1,1,0,0,0,1.27,0A1,1,0,0,0,18,6.05L13.1,1.4a.84.84,0,0,0-.6-.24Z"/>
+                    </symbol>
+                    <symbol  id="icon--iowa" viewBox="0 0 25 25">
+                        <path d="M19.33,22l-1-1.14-.15-.06L18,20.51h-.8l-14.19.12L3.15,20l-.09,0-.21-.49,0-.35.15-.8,0-.26L2.82,18l0-.4v-.18l0-.27,0,0-.13-.18-.06-.39,0-.16-.18-.12.07-.58,0,0-.12-.33L2,15,2,13.94l.1-.47-.18-.29-.12-.34,0-.22-.09-.06-.26-.42,0-.31-.07-.05L1,11.11l0-.31,0,0L1,10.57l-.15-.21,0-.4L.57,9.9V9.33l0,0V9.2l-.15-.1,0-.3L.09,8.38,0,8.05l.24-.8.14-.32V6.75l.07-.11v0l0-.09,0-.44L.58,6H.52L.23,5.4l0-.15L.18,5.1l.17-.51L.2,4.25.18,4h0v-.2l.06-.64.64-.06H21L21,3.82l.1.22.17.08.32.46,0,.56-.3.62.32,1.87,1,.31.35.49L23.2,9V9.3l0,.05.57.52.16.37.05.29.81.63,0,.46h0L25,12l-.38,1.74-.34.25-.11.71-.54.6-.46.22-.15,0-.24.26-.49.16-.72.07-.06.27.26.27.18.35.11.65-.05.49-.17.4-.34.45,0,.38-.31.71-.64.39v.17l0,.18,0,.44-.25.41-.49.21Zm-.19-2.46,0,0,0-.07.86-.49.1-.58.12-.23.33-.45V17.6l-.08-.25-.29-.17-.18-.64v-.2l.1-.64.29-.69.43-.33,1.07-.1.14-.2.4-.17.23,0,.07-.07.4-1,.24-.3.09-.62-.08-.25-.24-.17L23,11.62l-.11-.2-.21-.14-.12-.67-.65-.55-.25-.44.07-.39-.08-.12-1-.36-.31-.39-.19-.58-.32-2.13L20,5.1l0,0-.28-.4,0-.22H1.8V4.9l.14.17L2,5.39,2.08,6l-.19.78h0v.11L1.61,7.91,1.55,8l.27.32.1.53.25.2.19.65L2.3,10l.09.13,0,.13.11.58,0,.13.26.46.06.26.3.28.11.6,0,.12.2.25.11.4-.13.76.06.05v.08l.13.11.33.34-.06.14.21.19L4,15.51l.44.28-.28.57.54.53-.45.3,0,.13.08.16,0,.07,0,.09,0,.25V18l.06.42,0,.23,0,.1-.07.34.13.16,12.78-.11H19ZM1.19,6.62l.17.06h.12Z"/>
+                    </symbol>
+                </defs>
+                
+                
+            </svg>
+            
+            <span id="logo" class="img-replace"><img src="http://localhost:8888/pwm/wp-content/themes/peoples-weather-map/img/andreas_logo.png" alt="Iowa Map" /></span>
+            <h1 id="logotype" class="f-tan-light normal f-base-s f3-m f3-l serif">Peoples' Weather Map</h1>
+            <a class="hamburger" data-toggle=".show-menu" href="#"><span></span></a>
+            <div class="show-menu show-menu-sm show-menu-md">
+                <nav id="main-nav">
+                    <ul>
+                        <li>
+                            <a href="/" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="media-obj media-obj--center" id="nav-weather-stories"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--stories"></use></svg></span><span class="media-obj--body">Weather Stories</span></a>
+                        </li>
+                        <li>
+                            <a href="/" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span><span class="media-obj--body">Weather Hazards</span></a>
+                        </li>
+                        <li>
+                            <a href="/" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--climate"></use></svg></span><span class="media-obj--body">Climate</span></a>
+                        </li>
+                        <li>
+                            <a href="/" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--about"></use></svg></span><span class="media-obj--body">About Us</span></a>
+                        </li>
+                        <li>
+                            <a href="/" class="media-obj media-obj--center nav--get-involved"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--involved"></use></svg></span><span class="media-obj--body">Get Involved</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div><!-- end .show-menu -->
+           
+ 
+        </header>
+        
+         <nav>
+                <div id="stories-nav">
+                        <a class="close-x" data-toggle="#stories-nav" data-active="#nav-weather-stories" href="#"><span></span></a>
+                        <div class="pa3">
+                            
+                            <div class="nav-unit mb4 bb pb4 mt4 b--tan">
+                                <div class="media-obj media-obj--center mb2">
+                                    <div class="media-obj--figure"><span class="icon"><svg aria-hidden="true"><use xlink:href="#icon--iowa"></use></svg></span></div>
+                                    <div class="media-obj--body"><h3 class="f-small mb0 f-tan-light">Explore Stories By County</h3></div>
+                                </div>
+<!--                                <input id="counties-ac"/>-->
+                                <select class="county-search input-reset" data-placeholder="Select a county">
+                                    <option></option>
+                                    <option value="linn">Linn</option>
+                                    <option value="black-hawk">Black Hawk</option>
+                                    <option value="cedar">Cedar</option>
+                                </select>
+                            </div>
+                            
+                            <div class="nav-unit mb4 bb pb4 b--tan">
+                                <div class="media-obj media-obj--center mb2">
+                                    <div class="media-obj--figure"><span class="icon"><svg aria-hidden="true"><use xlink:href="#icon--iowa"></use></svg></span></div>
+                                    <div class="media-obj--body"><h3 class="f-small mb0 f-tan-light">Explore Stories By Region</h3></div>
+                                </div>
+                                <select class="styled-select input-reset" data-placeholder="Select a region">
+                                    <option></option>
+                                    <option value="east">East</option>
+                                    <option value="north">North</option>
+                                    <option value="south">South</option>
+                                    <option value="west">West</option>
+                                </select>
+                            </div>
+                            
+                            <div class="nav-unit mb4 pb4">
+                                <div class="media-obj media-obj--center mb2">
+                                    <div class="media-obj--figure"><span class="icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span></div>
+                                    <div class="media-obj--body"><h3 class="f-small mb0 f-tan-light">Explore Stories By Weather Hazards</h3></div>
+                                </div>
+                                <select class="styled-select input-reset" data-placeholder="Select a weather hazard">
+                                    <option></option>
+                                    <option value="blizzard">Blizzard</option>
+                                    <option value="drought">Drought</option>
+                                    <option value="flood">Flood</option>
+                                    <option value="heat">Heat</option>
+                                    <option value="insects">Insects</option>
+                                    <option value="tornado">Tornado</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                    </div>
+            </nav>
+        
+
+        <main>            
+
+                <section class="narrative-track map-bg">
+                    <div class="wrapper">
+                        
+                        <section class="nt-header">
+                            <h1 class="f2">Johnson County</h1>
+                        </section>
+                        
+                        
+                        <section class="nt-content">
+                            
+                            <ul class="nt-tabs">
+                                <li class="all nt-active"><a href="" data-toggle="all">All <span>99</span></a></li>
+                                <li class="blizzard"><a href="" data-toggle="blizzard">blizzard <span>99</span></a></li>
+                                <li class="drought"><a href="" data-toggle="drought">Drought <span>99</span></a></li>
+                                <li class="flood"><a href="" data-toggle="flood">Flood <span>99</span></a></li>
+                                <li class="heat"><a href="" data-toggle="heat">Heat <span>99</span></a></li>
+                                <li class="insects nt-none"><a href="" data-toggle="insects">Insects <span>0</span></a></li>
+                                <li class="tornado"><a href="" data-toggle="tornado">Tornado <span>99</span></a></li>
+                            </ul>
+                            
+                            
+                            <div class="nt-stories">
+                                
+                                <div class="nt-card flood">
+                                    <div class="img-wrap">
+                                        <div class="nt-arrow"></div>
+                                        <img src="img/nt-holder.jpg" alt="" />
+                                        <span class="nt-category">flood</span>
+                                    </div>
+                                    
+                                    <div class="nt-info">
+                                        <h2 class="f3">Some Flood</h2>
+                                        <h3 class="f-small">The University of Iowa, Iowa City,  Johnson County, Iowa</h3>
+                                        
+                                        <p>Several University of Iowa buildings reside on the banks of the Iowa River—approximately 2.8 million</p>
+                                        
+                                        <a href="/pwm/wp-content/themes/peoples-weather-map/article.html" class="btn btn-primary">Read Story &raquo;</a>
+                                        
+                                        <div class="nt-timeline">
+                                            <span class="timeline-line"></span>
+                                            <span class="timeline-date">1923</span>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div><!-- end .nt-card -->
+                                
+                                <div class="nt-card flood">
+                                    <div class="img-wrap">
+                                        <div class="nt-arrow"></div>
+                                        <img src="img/nt-holder.jpg" alt="" />
+                                        <span class="nt-category">flood</span>
+                                    </div>
+                                    
+                                    <div class="nt-info">
+                                        <h2 class="f3">Some Flood</h2>
+                                        <h3 class="f-small">The University of Iowa, Iowa City,  Johnson County, Iowa</h3>
+                                        
+                                        <p>Several University of Iowa buildings reside on the banks of the Iowa River—approximately 2.8 million</p>
+                                        
+                                        <a href="/pwm/wp-content/themes/peoples-weather-map/article.html" class="btn btn-primary">Read Story &raquo;</a>
+                                        
+                                        <div class="nt-timeline">
+                                            <span class="timeline-line"></span>
+                                            <span class="timeline-date">1923</span>
+                                        </div>
+                                    </div>
+                                </div><!-- end .nt-card -->
+                                
+                                <div class="nt-card flood">
+                                    <div class="img-wrap">
+                                        <div class="nt-arrow"></div>
+                                        <img src="img/nt-holder.jpg" alt="" />
+                                        <span class="nt-category">flood</span>
+                                    </div>
+                                    
+                                    <div class="nt-info">
+                                        <h2 class="f3">Some Flood</h2>
+                                        <h3 class="f-small">The University of Iowa, Iowa City,  Johnson County, Iowa</h3>
+                                        
+                                        <p>Several University of Iowa buildings reside on the banks of the Iowa River—approximately 2.8 million</p>
+                                        
+                                        <a href="/pwm/wp-content/themes/peoples-weather-map/article.html" class="btn btn-primary">Read Story &raquo;</a>
+                                        
+                                        <div class="nt-timeline">
+                                            <span class="timeline-line"></span>
+                                            <span class="timeline-date">1923</span>
+                                        </div>
+                                    </div>
+                                </div><!-- end .nt-card -->
+                                
+                            
+                            </div><!-- end .nt-stories -->
+                            
+                        
+                        </section><!-- end .nt-content -->
+                        
+                        
+                        
+                        
+                    </div><!-- end .wrapper -->
+                </section><!-- end #home-main -->
+
+                <footer>
+                    <div class="wrapper">
+                        <small>&copy; 2017 Peoples' Weather Map</small>
+                    </div><!-- end wrapper -->
+                </footer>
+        
+        </main>
+    
+        <section id="article-loader">
+            <div id="al-top">
+                <a class="close-x" href="#"><span></span></a>
+                <div class="social"></div>
+            </div>
+            <div id="al-overflow">
+                <div id="al-article"></div>
+                <div id="al-bottom">
+                    <a href="">Back to Johnson County Page</a>
+                    <a href="" class="btn btn-reverse">Learn More About Floods &raquo;</a>
+                    <a href="" class="btn btn-primary">Read Next Story In Johnson County &raquo;</a>
+                </div>
+            </div>
+        </section><!-- end #article-loader -->
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="http://localhost:8888/pwm/wp-content/themes/peoples-weather-map/js/lib/chosen.jquery.min.js"></script>
+<!--        <script src="js/lib/jquery.easy-autocomplete.min.js"></script>-->
+        <script src="http://localhost:8888/pwm/wp-content/themes/peoples-weather-map/js/show-menu.js"></script>
+    
+    
+    <!-- pull stories up for layout -->
+    <script>
+        $(function(){
+            // cache nt cards
+            var $cards = $('.nt-card');
+            
+            
+            function pullCards(){
+                 $cards.each(function(i,el){
+                    if (i!==0){
+                         var that = $(this),
+                             prev = $($cards[i-1]),
+                             prevHeight = prev.height(),
+                             pull = prevHeight/2;
+
+
+                        that.css('margin-top',-pull + 'px');
+
+                    } // if
+
+                }); //each
+            }
+            
+            if (window.innerWidth >= 600) {
+                 pullCards();
+            }
+           
+            
+            
+        });
+    </script>
+    
+    <!-- this is to load the articles within this page's context -->
+    <script>
+        $(function(){
+            var $cards = $('.nt-card');
+            
+            $cards.find('.btn').on('click',function(e){
+                e.preventDefault();
+                $('#al-article').load($(this).attr('href') + ' #article');
+                $('#article-loader').show();
+            });
+            
+            var Stories = function(el,data){
+                var self = this;
+                
+                this.loader = $('#al-article');
+                this.overlay = $('#article-loader');
+                this.topDiv = $('#al-top');
+                this.close = this.topDiv.find('.close-x');
+                
+                this.setCards = function(){
+                    return $('.nt-card');
+                };
+                this.cards = this.setCards();
+                
+                this.setBtns = function(){
+                    return self.cards.find('.btn');
+                };
+                this.btns = this.setBtns();
+                
+                this.addBtnEvents = function(){
+                    self.btns.on('click',function(e){
+                        e.preventDefault();
+                        self.loader.load($(this).attr('href') + ' #article');
+                        self.overlay.css('right',0);
+                        self.topDiv.css('right',0);
+                    });
+                };
+                
+                this.close.on('click',function(e){
+                    e.preventDefault();
+                    self.overlay.css('right','-100%');
+                    self.topDiv.css('right','-100%');
+                });
+                
+                this.init = function(){
+                    this.addBtnEvents();
+                }
+                this.init();
+                
+            }; // stories
+            
+            var pwmStories = new Stories();
+            
+        });
+    
+    </script>
+    
+        
+        
+        <!-- map -->
+        
+<!--
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+        <script src="https://d3js.org/d3-path.v1.min.js"></script>
+        <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+        <script src="https://d3js.org/topojson.v2.min.js"></script>
+        <script src="http://d3js.org/queue.v1.min.js"></script>
+-->
+        
+            
+        
+
+
+
+
+</body>
+</html>
