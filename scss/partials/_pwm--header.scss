@@ -230,12 +230,12 @@ header .close-x {
 @media #{$breakpoint-lg} {
     
     header {
-        z-index: 2;
+        z-index: 9999;
     }
     
     #stories-nav {
         width: 400px;
-        z-index: 1;
+        z-index: 9998;
         left: -100px;
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
         
@@ -251,9 +251,6 @@ header .close-x {
     }
 }
 
-.easy-autocomplete {
-    width: 100%!important;
-}
 
 #stories-nav input, #stories-nav select {
     width: 100%;

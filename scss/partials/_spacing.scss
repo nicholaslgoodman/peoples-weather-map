@@ -210,7 +210,7 @@ $spacing-extra-extra-extra-large: 16rem !default;
 .mt1 {  margin-top: $spacing-extra-small; }
 .mt2  {  margin-top: $spacing-small; }
 .mt3  {  margin-top: $spacing-medium; }
-.mt4  {  margin-top: $spacing-large; }
+.mt4  {  margin-top: $spacing-large!important; }
 .mt5  {  margin-top: $spacing-extra-large; }
 .mt6 {  margin-top: $spacing-extra-extra-large; }
 .mt7 { margin-top: $spacing-extra-extra-extra-large; }

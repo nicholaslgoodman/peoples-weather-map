@@ -6,10 +6,40 @@
 }
 
 .btn-primary {
+    border: 1px solid $accent;
     background-color: $accent;
     color: #fff;
 }
 
 .btn-primary:hover {
+    background-color: $accent_hover;
+    color: #fff;
+}
+
+.btn-reverse {
+    border: 1px solid $accent;
+    &:hover {
+        background-color: $accent;
+        color: #fff;
+    }
+}
+
+.x-text {
+    position: relative;
+    
+    &:before {
+        content: '\00d7';
+        color: #fff;
+        background-color: $accent;
+        text-align: center;
+        width: 1rem;
+        text-align: center;
+        display: inline-block;
+        margin-right: .5rem;
+    }
+    
+}
+
+.x-text:hover:before {
     background-color: $accent_hover;
 }

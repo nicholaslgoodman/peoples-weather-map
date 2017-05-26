@@ -49,3 +49,11 @@ footer {
     padding: 1rem;
     border-radius: 2px;
 }
+
+a {
+    color: $accent;
+    
+    &:hover {
+        color: $accent_hover;
+    }
+}
