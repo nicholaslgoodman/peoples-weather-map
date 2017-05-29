@@ -8,7 +8,7 @@
  */
 
 // Register Weather Hazards Taxonomy
-function weather_hazards_taxonomy() {
+function hazards_taxonomy() {
 
 	$labels = array(
 		'name'                       => _x( 'Weather Hazards', 'Taxonomy General Name', 'text_domain' ),
@@ -30,7 +30,7 @@ function weather_hazards_taxonomy() {
 		'not_found'                  => __( 'Not Found', 'text_domain' ),
 		'no_terms'                   => __( 'No Weather Hazards', 'text_domain' ),
 		'items_list'                 => __( 'Weather Hazards list', 'text_domain' ),
-		'items_list_navigation'      => __( 'Weather Hazardslist navigation', 'text_domain' ),
+		'items_list_navigation'      => __( 'Weather Hazards list navigation', 'text_domain' ),
 	);
 	$args = array(
 		'labels'                     => $labels,
@@ -41,10 +41,10 @@ function weather_hazards_taxonomy() {
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
 	);
-	register_taxonomy( 'weather-hazards', array( 'post' ), $args );
+	register_taxonomy( 'hazards', array( 'post' ), $args );
 
 }
-add_action( 'init', 'weather_hazards_taxonomy', 0 );
+add_action( 'init', 'hazards_taxonomy', 0 );
 
 // Register Region Taxonomy
 function region_taxonomy() {
