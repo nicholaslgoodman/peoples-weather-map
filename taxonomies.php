@@ -8,12 +8,12 @@
  */
 
 // Register Weather Hazards Taxonomy
-function hazards_taxonomy() {
+function hazard_taxonomy() {
 
 	$labels = array(
-		'name'                       => _x( 'Weather Hazards', 'Taxonomy General Name', 'text_domain' ),
-		'singular_name'              => _x( 'Weather Hazard', 'Taxonomy Singular Name', 'text_domain' ),
-		'menu_name'                  => __( 'Weather Hazard', 'text_domain' ),
+		'name'                       => _x( 'Hazards', 'Taxonomy General Name', 'text_domain' ),
+		'singular_name'              => _x( 'Hazard', 'Taxonomy Singular Name', 'text_domain' ),
+		'menu_name'                  => __( 'Hazard', 'text_domain' ),
 		'all_items'                  => __( 'All Weather Hazards', 'text_domain' ),
 		'parent_item'                => __( 'Parent Weather Hazard', 'text_domain' ),
 		'parent_item_colon'          => __( 'Parent Weather Hazard:', 'text_domain' ),
@@ -41,10 +41,10 @@ function hazards_taxonomy() {
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
 	);
-	register_taxonomy( 'hazards', array( 'post' ), $args );
+	register_taxonomy( 'hazard', array( 'post' ), $args );
 
 }
-add_action( 'init', 'hazards_taxonomy', 0 );
+add_action( 'init', 'hazard_taxonomy', 0 );
 
 // Register Region Taxonomy
 function region_taxonomy() {
