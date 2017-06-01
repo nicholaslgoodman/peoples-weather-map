@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying taxonomy county pages
+ * The template for displaying taxonomy hazard pages
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -17,7 +17,7 @@ get_header('tax'); ?>
 				//Display Title
 					$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 				
-					echo strtoupper($term->name) . ' COUNTY';
+					echo strtoupper($term->name);
 				?>
 			</h1>
 					
@@ -25,17 +25,14 @@ get_header('tax'); ?>
 			//Display number of posts with taxonomy term
 			$args = array(
 			  'numberposts' => -1,
-			  'county'   => $term->name
+			  'hazard'   => $term->name
 			);
 			$term_posts = get_posts( $args );
 
 		if (count($term_posts) > 0): 
 			//Display number of posts with taxonomy term
-			echo 'County Story Count: ' . count($term_posts);
+			echo 'Hazard Story Count: ' . count($term_posts);
 
-		// all
-			?> <h3>All -- <?php echo count($term_posts); ?> </h3> <?php
-				
 				foreach ( $term_posts as $post ) {
 		            setup_postdata($post);
 			
@@ -49,50 +46,6 @@ get_header('tax'); ?>
 		        	<?php
 				}
 
-		function customLoop($hazard, $county) {
-
-			$args = array(
-		  		'numberposts' => -1,
-		  		'county' => $county,
-		  		'hazard' => $hazard
-			);
-		
-
-		$posts = get_posts( $args );
-
-		?> <h3><?php echo $hazard . ': ' . count($posts); ?> </h3> <?php
-			
-			foreach ( $posts as $single ) {
-	            setup_postdata($single);
-				?>
-				<h1> 
-				<?php
-				// display post title 
-				echo get_the_title($single);
-				?>
-				</h1>
-				<?php
-				// display post excerpts
-		    	the_excerpt();
-		    
-	        	?>
-	        	<h5><a href="<?php the_permalink($single) ?>">Read the story</a> </h5>
-	        	<?php
-			}
-		} 		
-
-		// flood
-		customLoop('flood', $term->name);
-		// drought
-		customLoop('drought', $term->name);
-		// insects
-		customLoop('insects', $term->name);
-		// heat
-		customLoop('heat', $term->name);
-		// blizzard
-		customLoop('blizzard', $term->name);
-		// tornado
-		customLoop('tornado', $term->name);
 
 		else: ?>
     	
