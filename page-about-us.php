@@ -1,41 +1,36 @@
 <?php
 /**
- * The template for displaying all pages
+ * The template for displaying about
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
  * @package pwmap
  */
 
-get_header(); ?>
+get_header('article'); ?>
 
 <main>
 
 <section class="article-page map-bg">
-                    <div class="wrapper">
-		<?php 
-		while ( have_posts() ) : the_post(); ?>
+    <div class="wrapper">
+		<?php while ( have_posts() ) : the_post(); ?>
 
 			
 		<article id="article" class="article-page">
-
-                            <h1 class="f2"> <?php the_title('<h1 class="post-title">', '</h1>'); ?> </h1>
-
-                            
-			
+        <h3><?php echo strtoupper(get_the_title()); ?></h3>
 			<img src="img/nt-holder.jpg" alt="" class="fl" />
 			<?php
-			the_content();
+				global $id;
+				    wp_list_pages( array(
+				        'title_li'    => '',
+				        'child_of'    => $id
+				    ) );
 
 			//get_template_part( 'template-parts/content', get_post_format() );
 
 			//the_post_navigation();
 			?>
+
  			</article>
                         
                     </div><!-- end .wrapper -->

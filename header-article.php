@@ -1,6 +1,6 @@
 <?php
 /**
- * The header for our theme
+ * The header for articles
  *
  * This is the template that displays all of the <head> section and everything up until <div id="content">
  *
@@ -63,31 +63,31 @@
                 <nav id="main-nav">
                     <ul>
                         <li>
-                            <a href="../../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
+                            <a href="../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="media-obj media-obj--center" id="nav-weather-stories"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--stories"></use></svg></span><span class="media-obj--body">Weather Stories</span></a>
                         </li>
                         <li>
-                            <a href="../../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span><span class="media-obj--body">Weather Hazards</span></a>
+                            <a href="../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span><span class="media-obj--body">Weather Hazards</span></a>
                         </li>
                         <li>
-                            <a href="../../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--climate"></use></svg></span><span class="media-obj--body">Climate</span></a>
+                            <a href="../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--climate"></use></svg></span><span class="media-obj--body">Climate</span></a>
                         </li>
                         <li>
-                            <a href="../../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--about"></use></svg></span><span class="media-obj--body">About Us</span></a>
+                            <a href="../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--about"></use></svg></span><span class="media-obj--body">About Us</span></a>
                         </li>
                         <li>
-                            <a href="../../" class="media-obj media-obj--center nav--get-involved"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--involved"></use></svg></span><span class="media-obj--body">Get Involved</span></a>
+                            <a href="../" class="media-obj media-obj--center nav--get-involved"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--involved"></use></svg></span><span class="media-obj--body">Get Involved</span></a>
                         </li>
                     </ul>
                 </nav>
             </div><!-- end .show-menu -->
            
- 
-        </header>
+ </header>
         
-         <nav>
+        
+                  <nav>
                 <div id="stories-nav">
                         <a class="close-x" data-toggle="#stories-nav" data-active="#nav-weather-stories" href="#"><span></span></a>
                         <div class="pa3">
@@ -139,5 +139,7 @@
                         </div>
                     </div>
             </nav>
-                     
-        
+             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="<?php bloginfo( 'template_url' ); ?>/js/lib/chosen.jquery.min.js"></script>
+    <!--        <script src="js/lib/jquery.easy-autocomplete.min.js"></script>-->
+            <script src="<?php bloginfo( 'template_url' ); ?>/js/show-menu.js"></script>

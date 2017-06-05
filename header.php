@@ -63,7 +63,7 @@
                 <nav id="main-nav">
                     <ul>
                         <li>
-                            <a href="" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
+                            <a href="../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="media-obj media-obj--center" id="nav-weather-stories"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--stories"></use></svg></span><span class="media-obj--body">Weather Stories</span></a>
@@ -139,4 +139,7 @@
                         </div>
                     </div>
             </nav>
-        
+                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="<?php bloginfo( 'template_url' ); ?>/js/lib/chosen.jquery.min.js"></script>
+    <!--        <script src="js/lib/jquery.easy-autocomplete.min.js"></script>-->
+            <script src="<?php bloginfo( 'template_url' ); ?>/js/show-menu.js"></script>

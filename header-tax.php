@@ -86,6 +86,61 @@
            
  
         </header>
-        
+                <nav>
+                <div id="stories-nav">
+                        <a class="close-x" data-toggle="#stories-nav" data-active="#nav-weather-stories" href="#"><span></span></a>
+                        <div class="pa3">
+                            
+                            <div class="nav-unit mb4 bb pb4 mt4 b--tan">
+                                <div class="media-obj media-obj--center mb2">
+                                    <div class="media-obj--figure"><span class="icon"><svg aria-hidden="true"><use xlink:href="#icon--iowa"></use></svg></span></div>
+                                    <div class="media-obj--body"><h3 class="f-small mb0 f-tan-light">Explore Stories By County</h3></div>
+                                </div>
+<!--                                <input id="counties-ac"/>-->
+                                <select class="county-search input-reset" data-placeholder="Select a county">
+                                    <option></option>
+                                    <option value="linn">Linn</option>
+                                    <option value="black-hawk">Black Hawk</option>
+                                    <option value="cedar">Cedar</option>
+                                </select>
+                            </div>
+                            
+                            <div class="nav-unit mb4 bb pb4 b--tan">
+                                <div class="media-obj media-obj--center mb2">
+                                    <div class="media-obj--figure"><span class="icon"><svg aria-hidden="true"><use xlink:href="#icon--iowa"></use></svg></span></div>
+                                    <div class="media-obj--body"><h3 class="f-small mb0 f-tan-light">Explore Stories By Region</h3></div>
+                                </div>
+                                <select class="styled-select input-reset" data-placeholder="Select a region">
+                                    <option></option>
+                                    <option value="east">East</option>
+                                    <option value="north">North</option>
+                                    <option value="south">South</option>
+                                    <option value="west">West</option>
+                                </select>
+                            </div>
+                            
+                            <div class="nav-unit mb4 pb4">
+                                <div class="media-obj media-obj--center mb2">
+                                    <div class="media-obj--figure"><span class="icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span></div>
+                                    <div class="media-obj--body"><h3 class="f-small mb0 f-tan-light">Explore Stories By Weather Hazards</h3></div>
+                                </div>
+                                <select class="styled-select input-reset" data-placeholder="Select a weather hazard">
+                                    <option></option>
+                                    <option value="blizzard">Blizzard</option>
+                                    <option value="drought">Drought</option>
+                                    <option value="flood">Flood</option>
+                                    <option value="heat">Heat</option>
+                                    <option value="insects">Insects</option>
+                                    <option value="tornado">Tornado</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                    </div>
+            </nav>
+                     
          
-        
+                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="<?php bloginfo( 'template_url' ); ?>/js/lib/chosen.jquery.min.js"></script>
+<!--        <script src="js/lib/jquery.easy-autocomplete.min.js"></script>-->
+        <script src="<?php bloginfo( 'template_url' ); ?>/js/show-menu.js"></script>
