@@ -25,7 +25,7 @@ $(function(){
     $('.styled-select').chosen({disable_search_threshold: 10});
     
     $('.county-search, .styled-select').change(function(e){
-        window.location = '/' + $(this).val();
+        window.location = '' + $(this).val();
         $(this).val('');
     });
     

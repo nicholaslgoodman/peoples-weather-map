@@ -25,7 +25,6 @@
 
 <body <?php body_class(); ?>>
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'pwmap' ); ?></a>
-
 	
    <header class="fixed-ns relative-m">
             <svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -53,7 +52,6 @@
                     </symbol>
                 </defs>
                 
-                
             </svg>
             
             <span id="logo" class="img-replace"><img src="<?php bloginfo( 'template_url' ); ?>/img/andreas_logo.png" alt="Iowa Map" /></span>
@@ -63,7 +61,7 @@
                 <nav id="main-nav">
                     <ul>
                         <li>
-                            <a href="../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
+                            <a href="index.php" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="media-obj media-obj--center" id="nav-weather-stories"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--stories"></use></svg></span><span class="media-obj--body">Weather Stories</span></a>
@@ -100,9 +98,9 @@
 <!--                                <input id="counties-ac"/>-->
                                 <select class="county-search input-reset" data-placeholder="Select a county">
                                     <option></option>
-                                    <option value="linn">Linn</option>
-                                    <option value="black-hawk">Black Hawk</option>
-                                    <option value="cedar">Cedar</option>
+                                    <option value="county/linn">Linn</option>
+                                    <option value="county/cherokee">Black Hawk</option>
+                                    <option value="county/johnson">Cedar</option>
                                 </select>
                             </div>
                             
@@ -113,10 +111,10 @@
                                 </div>
                                 <select class="styled-select input-reset" data-placeholder="Select a region">
                                     <option></option>
-                                    <option value="east">East</option>
-                                    <option value="north">North</option>
-                                    <option value="south">South</option>
-                                    <option value="west">West</option>
+                                    <option value="region/east">East</option>
+                                    <option value="region/north">North</option>
+                                    <option value="region/south">South</option>
+                                    <option value="region/west">West</option>
                                 </select>
                             </div>
                             
@@ -127,19 +125,19 @@
                                 </div>
                                 <select class="styled-select input-reset" data-placeholder="Select a weather hazard">
                                     <option></option>
-                                    <option value="blizzard">Blizzard</option>
-                                    <option value="drought">Drought</option>
-                                    <option value="flood">Flood</option>
-                                    <option value="heat">Heat</option>
-                                    <option value="insects">Insects</option>
-                                    <option value="tornado">Tornado</option>
+                                    <option value="hazard/blizzard">Blizzard</option>
+                                    <option value="hazard/drought">Drought</option>
+                                    <option value="hazard/flood">Flood</option>
+                                    <option value="hazard/heat">Heat</option>
+                                    <option value="hazard/insects">Insects</option>
+                                    <option value="hazard/tornado">Tornado</option>
                                 </select>
                             </div>
                             
                         </div>
                     </div>
             </nav>
-                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="<?php bloginfo( 'template_url' ); ?>/js/lib/chosen.jquery.min.js"></script>
     <!--        <script src="js/lib/jquery.easy-autocomplete.min.js"></script>-->
             <script src="<?php bloginfo( 'template_url' ); ?>/js/show-menu.js"></script>

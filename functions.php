@@ -127,6 +127,33 @@ function register_taxonomies()
 add_action( 'after_setup_theme', 'register_taxonomies');
 
 /**
+ * Register custom post types.
+ */
+function register_pwm_custom_post_types()
+{
+	locate_template( array( 'custom-post-types.php' ), true, true );
+}
+add_action( 'after_setup_theme', 'register_pwm_custom_post_types');
+
+/* Flush rewrite rules for custom post types. */
+add_action( 'after_switch_theme', 'flush_rewrite_rules' );
+
+/**
+ * Change excerpt length
+ */
+function custom_excerpt_length( $length ) 
+{
+return 15;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
+function new_excerpt_more( $more ) 
+{
+return '... <a class="read-more" href="'. get_permalink( get_the_ID() ) . '">read more</a>';
+}
+add_filter( 'excerpt_more', 'new_excerpt_more' );
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';

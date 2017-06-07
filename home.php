@@ -1,4 +1,13 @@
-<?php get_header(); ?>
+<?php
+/**
+ * The template for displaying the home page
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#home-page-display
+ *
+ * @package pwmap
+ */
+
+  get_header(); ?>
 
 
 <main>            
@@ -40,9 +49,9 @@
                                         <h3 class="f5">Select a county</h3>
                                         <select class="county-search input-reset" data-placeholder="Select a county" style="width:100%;">
                                             <option></option>
-                                            <option value="linn">Linn (7)</option>
-                                            <option value="black-hawk">Black Hawk</option>
-                                            <option value="cedar">Cedar</option>
+                                            <option value="county/linn">Linn (7)</option>
+                                            <option value="county/cherokee">Cherokee</option>
+                                            <option value="county/johnson">Johnson</option>
                                         </select>
                                     </div><!-- end .col -->
 
@@ -50,10 +59,10 @@
                                         <h3 class="f5">Select a region</h3>
                                         <select class="styled-select input-reset" data-placeholder="Select a region" style="width:100%;">
                                             <option></option>
-                                            <option value="east">East</option>
-                                            <option value="north">North</option>
-                                            <option value="south">South</option>
-                                            <option value="west">West</option>
+                                            <option value="region/east">East</option>
+                                            <option value="region/north">North</option>
+                                            <option value="region/south">South</option>
+                                            <option value="region/west">West</option>
                                         </select>
                                     </div><!-- end .col -->
 
@@ -66,42 +75,42 @@
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="drought" />
                                             <h4>Drought</h4>
                                             <p class="f-small"><span>10</span> stories</p>
-                                            <a href="/drought" class="btn">read now &raquo;</a>
+                                            <a href="hazard/drought" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 flood">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="flood" />
                                             <h4>Flood</h4>
                                             <p class="f-small"><span>10</span> stories</p>
-                                            <a href="/flood" class="btn">read now &raquo;</a>
+                                            <a href="hazard/flood" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 insects">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="insects" />
                                             <h4>Insects</h4>
                                             <p class="f-small"><span>10</span> stories</p>
-                                            <a href="/insects" class="btn">read now &raquo;</a>
+                                            <a href="hazard/insects" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 heat">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="heat" />
                                             <h4>Heat</h4>
                                             <p class="f-small"><span>10</span> stories</p>
-                                            <a href="/heat" class="btn">read now &raquo;</a>
+                                            <a href="hazard/heat" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 blizzard">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="blizzard" />
                                             <h4>Blizzard</h4>
                                             <p class="f-small"><span>10</span> stories</p>
-                                            <a href="/blizzard" class="btn">read now &raquo;</a>
+                                            <a href="hazard/blizzard" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 tornado">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="tornado" />
                                             <h4>Tornado</h4>
                                             <p class="f-small"><span>10</span> stories</p>
-                                            <a href="/tornado" class="btn">read now &raquo;</a>
+                                            <a href="hazard/tornado" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                     </div><!-- end .flex-row -->
@@ -114,7 +123,7 @@
                         <div id="home-get-involved" class="pwm-box mb4">
                             <h5 class="f3">Help get more stories on the map</h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat ipsum nec massa imperdiet accumsan. Ut ullamcorper et risus sit amet porttitor. Pellentesque quis auctor dolor. Integer tempor mi a condimentum iaculis. Nam auctor accumsan arcu, eget ornare magna viverra in. </p>
-                            <a href="/get-involved" class="btn btn-primary">Find out how to submit stories for your county &raquo;</a>
+                            <a href="get-involved" class="btn btn-primary">Find out how to submit stories for your county &raquo;</a>
                         </div><!-- end .home-get-involved -->
                         
                         
@@ -130,11 +139,7 @@
         
         </main>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="<?php bloginfo( 'template_url' ); ?>/js/lib/chosen.jquery.min.js"></script>
-<!--        <script src="js/lib/jquery.easy-autocomplete.min.js"></script>-->
-        <script src="<?php bloginfo( 'template_url' ); ?>/js/show-menu.js"></script>
-        
+
         
         <!-- map -->
         
