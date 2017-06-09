@@ -17,6 +17,8 @@
 <link rel="profile" href="http://gmpg.org/xfn/11">
 
 <?php wp_head(); ?>
+
+
     
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700|Lato:400,700" rel="stylesheet">
     <link rel="stylesheet" href="<?php bloginfo( 'template_url' ); ?>/css/lib/chosen.css">
@@ -97,10 +99,20 @@
                                 </div>
 <!--                                <input id="counties-ac"/>-->
                                 <select class="county-search input-reset" data-placeholder="Select a county">
-                                    <option></option>
-                                    <option value="county/linn">Linn</option>
-                                    <option value="county/cherokee">Black Hawk</option>
-                                    <option value="county/johnson">Cedar</option>
+                                <option></option>
+                              <?php
+
+                                 $counties = get_terms( array(
+                                    'taxonomy' => 'county',
+                                    'hide_empty' => false,
+                                ) );
+
+                                foreach ($counties as $county) {
+                                    echo '<option value="county/' . $county->slug . '">' . $county->name . '</option>';
+                                }
+
+                                ?> 
+
                                 </select>
                             </div>
                             
@@ -111,10 +123,19 @@
                                 </div>
                                 <select class="styled-select input-reset" data-placeholder="Select a region">
                                     <option></option>
-                                    <option value="region/east">East</option>
-                                    <option value="region/north">North</option>
-                                    <option value="region/south">South</option>
-                                    <option value="region/west">West</option>
+                              <?php
+
+                                 $regions = get_terms( array(
+                                    'taxonomy' => 'region',
+                                    'hide_empty' => false,
+                                ) );
+
+                                foreach ($regions as $region) {
+                                    echo '<option value="region/' . $region->slug . '">' . $region->name . '</option>';
+                                }
+
+                                ?> 
+
                                 </select>
                             </div>
                             
@@ -125,12 +146,19 @@
                                 </div>
                                 <select class="styled-select input-reset" data-placeholder="Select a weather hazard">
                                     <option></option>
-                                    <option value="hazard/blizzard">Blizzard</option>
-                                    <option value="hazard/drought">Drought</option>
-                                    <option value="hazard/flood">Flood</option>
-                                    <option value="hazard/heat">Heat</option>
-                                    <option value="hazard/insects">Insects</option>
-                                    <option value="hazard/tornado">Tornado</option>
+                              <?php
+
+                                 $hazards = get_terms( array(
+                                    'taxonomy' => 'hazard',
+                                    'hide_empty' => false,
+                                ) );
+
+                                foreach ($hazards as $hazard) {
+                                    echo '<option value="hazard/' . $hazard->slug . '">' . $hazard->name . '</option>';
+                                }
+
+                                ?>                                     
+
                                 </select>
                             </div>
                             

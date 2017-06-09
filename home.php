@@ -49,9 +49,18 @@
                                         <h3 class="f5">Select a county</h3>
                                         <select class="county-search input-reset" data-placeholder="Select a county" style="width:100%;">
                                             <option></option>
-                                            <option value="county/linn">Linn (7)</option>
-                                            <option value="county/cherokee">Cherokee</option>
-                                            <option value="county/johnson">Johnson</option>
+                              <?php
+
+                                 $counties = get_terms( array(
+                                    'taxonomy' => 'county',
+                                    'hide_empty' => false,
+                                ) );
+
+                                foreach ($counties as $county) {
+                                    echo '<option value="county/' . $county->slug . '">' . $county->name . '</option>';
+                                }
+
+                                ?> 
                                         </select>
                                     </div><!-- end .col -->
 
@@ -59,10 +68,18 @@
                                         <h3 class="f5">Select a region</h3>
                                         <select class="styled-select input-reset" data-placeholder="Select a region" style="width:100%;">
                                             <option></option>
-                                            <option value="region/east">East</option>
-                                            <option value="region/north">North</option>
-                                            <option value="region/south">South</option>
-                                            <option value="region/west">West</option>
+                              <?php
+
+                                 $regions = get_terms( array(
+                                    'taxonomy' => 'region',
+                                    'hide_empty' => false,
+                                ) );
+
+                                foreach ($regions as $region) {
+                                    echo '<option value="region/' . $region->slug . '">' . $region->name . '</option>';
+                                }
+
+                                ?> 
                                         </select>
                                     </div><!-- end .col -->
 
@@ -70,46 +87,108 @@
                                 
                                 <div id="hm-hazards">
                                     <div class="flex-row">
-                                        
+                                    <?php
+                                        $argsDrought = array(
+                                        'post_type' => 'post',
+                                        'tax_query' => array(
+                                            array(
+                                                'taxonomy' => 'hazard',
+                                                'field'    => 'slug',
+                                                'terms'    => 'drought',
+                                            ))
+                                        );
+                                        $argsFlood = array(
+                                        'post_type' => 'post',
+                                        'tax_query' => array(
+                                            array(
+                                                'taxonomy' => 'hazard',
+                                                'field'    => 'slug',
+                                                'terms'    => 'flood',
+                                            ))
+                                        );
+                                       $argsInsects = array(
+                                        'post_type' => 'post',
+                                        'tax_query' => array(
+                                            array(
+                                                'taxonomy' => 'hazard',
+                                                'field'    => 'slug',
+                                                'terms'    => 'insects',
+                                            ))
+
+                                        );
+                                      $argsBlizzard = array(
+                                        'post_type' => 'post',
+                                        'tax_query' => array(
+                                            array(
+                                                'taxonomy' => 'hazard',
+                                                'field'    => 'slug',
+                                                'terms'    => 'blizzard',
+                                            ))
+                                        );
+                                         $argsHeat = array(
+                                        'post_type' => 'post',
+                                        'tax_query' => array(
+                                            array(
+                                                'taxonomy' => 'hazard',
+                                                'field'    => 'slug',
+                                                'terms'    => 'heat',
+                                            ))
+                                        );
+                                        $argsTornado = array(
+                                        'post_type' => 'post',
+                                        'tax_query' => array(
+                                            array(
+                                                'taxonomy' => 'hazard',
+                                                'field'    => 'slug',
+                                                'terms'    => 'tornado',
+                                            ))
+                                        );
+                                        $queryDrought = new WP_Query( $argsDrought );
+                                        $queryFlood = new WP_Query( $argsFlood );
+                                        $queryInsects = new WP_Query( $argsInsects );
+                                        $queryBlizzard = new WP_Query( $argsBlizzard );
+                                        $queryHeat = new WP_Query( $argsHeat );
+                                        $queryTornado = new WP_Query( $argsTornado );
+                                        ?>
                                         <div class="col-sm-50 col-md-33 col-lg-16 drought">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="drought" />
                                             <h4>Drought</h4>
-                                            <p class="f-small"><span>10</span> stories</p>
+                                            <p class="f-small"><span><?php echo $queryDrought->post_count; ?> </span> stories</p>
                                             <a href="hazard/drought" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 flood">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="flood" />
                                             <h4>Flood</h4>
-                                            <p class="f-small"><span>10</span> stories</p>
+                                            <p class="f-small"><span><?php echo $queryFlood->post_count; ?></span> stories</p>
                                             <a href="hazard/flood" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 insects">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="insects" />
                                             <h4>Insects</h4>
-                                            <p class="f-small"><span>10</span> stories</p>
+                                            <p class="f-small"><span><?php echo $queryInsects->post_count; ?></span> stories</p>
                                             <a href="hazard/insects" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 heat">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="heat" />
                                             <h4>Heat</h4>
-                                            <p class="f-small"><span>10</span> stories</p>
+                                            <p class="f-small"><span><?php echo $queryHeat->post_count; ?></span> stories</p>
                                             <a href="hazard/heat" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 blizzard">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="blizzard" />
                                             <h4>Blizzard</h4>
-                                            <p class="f-small"><span>10</span> stories</p>
+                                            <p class="f-small"><span><?php echo $queryBlizzard->post_count; ?></span> stories</p>
                                             <a href="hazard/blizzard" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 tornado">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="tornado" />
                                             <h4>Tornado</h4>
-                                            <p class="f-small"><span>10</span> stories</p>
+                                            <p class="f-small"><span><?php echo $queryTornado->post_count; ?></span> stories</p>
                                             <a href="hazard/tornado" class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
@@ -152,39 +231,192 @@
         
         <script>
             
-        
-        var stories = [
-            {
-                county: 'Johnson',
-                countySafe: 'johnson',
-                countTotal: 16,
-                hazards: [
-                    {hazard: 'drought',count: 5},
-                    {hazard: 'flood',count: 8},
-                    {hazard: 'tornado',count: 3}
-                ]
-            },
-            {
-                county: 'Black Hawk',
-                countySafe: 'black-hawk',
-                countTotal: 4,
-                hazards: [
-                    {hazard: 'insects',count: 2},
-                    {hazard: 'heat',count: 2}
-                ]
-            },
-            {
-                county: "O'Brien",
-                countySafe: 'obrien',
-                countTotal: 9,
-                hazards: [
-                    {hazard: 'blizzard',count: 5},
-                    {hazard: 'flood',count: 3},
-                    {hazard: 'tornado',count: 1}
-                ]
-            }
+       var stories = [
+            <?php    
+                // $terms = get_terms( array(
+                // 'taxonomy' => 'county',
+                // 'hide_empty' => false,
+                // ));
+                 $terms = get_terms( array(
+                                'taxonomy' => 'county',
+                                'hide_empty' => false,
+                        ) );
+
+                foreach ($terms as $term) {
+                    $argsCounties = array(
+                    'post_type' => 'post',
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'county',
+                            'field'    => 'slug',
+                            'terms'    => $term->slug,
+                        ),
+                    ),
+                    );
+                    $argsDrought = array(
+                    'post_type' => 'post',
+                    'tax_query' => array(
+                        'relation' => 'AND',
+                        array(
+                            'taxonomy' => 'hazard',
+                            'field'    => 'slug',
+                            'terms'    => 'drought',
+                        ),
+                        array(
+                            'taxonomy' => 'county',
+                            'field'    => 'slug',
+                            'terms'    => $term->slug,
+                        ),
+                    ),
+                    );
+                    $argsFlood = array(
+                    'post_type' => 'post',
+                    'tax_query' => array(
+                        'relation' => 'AND',
+                        array(
+                            'taxonomy' => 'hazard',
+                            'field'    => 'slug',
+                            'terms'    => 'flood',
+                        ),
+                        array(
+                            'taxonomy' => 'county',
+                            'field'    => 'slug',
+                            'terms'    => $term->slug,
+                        ),
+                    ),
+                    );
+                   $argsInsects = array(
+                    'post_type' => 'post',
+                    'tax_query' => array(
+                        'relation' => 'AND',
+                        array(
+                            'taxonomy' => 'hazard',
+                            'field'    => 'slug',
+                            'terms'    => 'insects',
+                        ),
+                        array(
+                            'taxonomy' => 'county',
+                            'field'    => 'slug',
+                            'terms'    => $term->slug,
+                        ),
+                    ),
+                    );
+                  $argsBlizzard = array(
+                    'post_type' => 'post',
+                    'tax_query' => array(
+                        'relation' => 'AND',
+                        array(
+                            'taxonomy' => 'hazard',
+                            'field'    => 'slug',
+                            'terms'    => 'blizzard',
+                        ),
+                        array(
+                            'taxonomy' => 'county',
+                            'field'    => 'slug',
+                            'terms'    => $term->slug,
+                        ),
+                    ),
+                    );
+                     $argsHeat = array(
+                    'post_type' => 'post',
+                    'tax_query' => array(
+                        'relation' => 'AND',
+                        array(
+                            'taxonomy' => 'hazard',
+                            'field'    => 'slug',
+                            'terms'    => 'heat',
+                        ),
+                        array(
+                            'taxonomy' => 'county',
+                            'field'    => 'slug',
+                            'terms'    => $term->slug,
+                        ),
+                    ),
+                    );
+                    $argsTornado = array(
+                    'post_type' => 'post',
+                    'tax_query' => array(
+                        'relation' => 'AND',
+                        array(
+                            'taxonomy' => 'hazard',
+                            'field'    => 'slug',
+                            'terms'    => 'tornado',
+                        ),
+                        array(
+                            'taxonomy' => 'county',
+                            'field'    => 'slug',
+                            'terms'    => $term->slug,
+                        ),
+                    ),
+                    );
+                    $queryCounties = new WP_Query( $argsCounties );
+                    $queryDrought = new WP_Query( $argsDrought );
+                    $queryFlood = new WP_Query( $argsFlood );
+                    $queryInsects = new WP_Query( $argsInsects );
+                    $queryBlizzard = new WP_Query( $argsBlizzard );
+                    $queryHeat = new WP_Query( $argsHeat );
+                    $queryTornado = new WP_Query( $argsTornado );
+                    echo '{
+                            county: \'' . $term->slug . '\', 
+                            countySafe: \''. $term->slug . '\', 
+                            countTotal: '. $queryCounties->post_count . ', 
+                            hazards: [';
+                    if ($queryDrought->post_count > 0):
+                        echo '{hazard: \'drought\',count: '. $queryDrought->post_count .'},';
+                     endif;
+                    if ($queryFlood->post_count > 0):
+                        echo '{hazard: \'flood\',count: '. $queryFlood->post_count .'},';
+                     endif;
+                    if ($queryInsects->post_count > 0):
+                        echo '{hazard: \'insects\',count: '. $queryInsects->post_count .'},';
+                     endif;
+                    if ($queryBlizzard->post_count > 0):
+                        echo    '{hazard: \'blizzard\',count: '. $queryBlizzard->post_count .'},';
+                     endif;
+                    if ($queryHeat->post_count > 0):
+                         echo '{hazard: \'heat\',count: '. $queryHeat->post_count .'},';
+                    endif;
+                    if ($queryTornado->post_count > 0) :                   
+                        echo '{hazard: \'tornado\',count: '. $queryTornado->post_count .'}';
+                    endif;
+                    echo']
+                         },';
+                }
+            ?>  
+       ];
+
+        // var stories = [
+        //     {
+        //         county: 'Johnson',
+        //         countySafe: 'johnson',
+        //         countTotal: 16,
+        //         hazards: [
+        //             {hazard: 'drought',count: 5},
+        //             {hazard: 'flood',count: 8},
+        //             {hazard: 'tornado',count: 3}
+        //         ]
+        //     },
+        //     {
+        //         county: 'Black Hawk',
+        //         countySafe: 'black-hawk',
+        //         countTotal: 4,
+        //         hazards: [
+        //             {hazard: 'insects',count: 2},
+        //             {hazard: 'heat',count: 2}
+        //         ]
+        //     },
+        //     {
+        //         county: "O'Brien",
+        //         countySafe: 'obrien',
+        //         countTotal: 9,
+        //         hazards: [
+        //             {hazard: 'blizzard',count: 5},
+        //             {hazard: 'flood',count: 3},
+        //             {hazard: 'tornado',count: 1}
+        //         ]
+        //     }
             
-        ];
+        // ];
           
         
             

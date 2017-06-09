@@ -138,6 +138,15 @@ add_action( 'after_setup_theme', 'register_pwm_custom_post_types');
 /* Flush rewrite rules for custom post types. */
 add_action( 'after_switch_theme', 'flush_rewrite_rules' );
 
+/* 
+ * Register county terms for county taxonomies
+ */
+// function register_counties()
+// {
+// 	locate_template( array( 'counties.php' ), true, true );
+// }
+// add_action( 'after_setup_theme', 'register_counties');
+
 /**
  * Change excerpt length
  */
