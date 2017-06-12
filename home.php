@@ -506,7 +506,7 @@
             
             this.buildDonuts = function(){
                   self.counties.each(function(d){
-                     if (d.hazards) {
+                     if (d.hazards.length > 0) {
                          
                          var arcs = d3.pie()
                             .value(function(d) { return d.count; })
@@ -578,7 +578,7 @@
                 
                 /** click to story track *******/
                 self.pies.on('click',function(d){
-                    window.location = d.countySafe; 
+                    window.location = 'county/' + d.countySafe; 
                 });
             };
             
