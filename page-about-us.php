@@ -1,13 +1,13 @@
 <?php
 /**
- * The template for displaying about
+ * The template for displaying about page archive
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
  * @package pwmap
  */
 
-get_header('article'); ?>
+get_header(); ?>
 
 <main>
 
@@ -44,9 +44,7 @@ get_header('article'); ?>
 		endwhile; // End of the loop.
 		?>
 
-		</main><!-- #main -->
-
-	</div><!-- #primary -->
+		
 
 
 <?php

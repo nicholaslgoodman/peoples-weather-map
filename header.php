@@ -56,6 +56,10 @@
                 
             </svg>
             
+            <script>
+            var history = window.location.href;
+            </script>
+
             <span id="logo" class="img-replace"><img src="<?php bloginfo( 'template_url' ); ?>/img/andreas_logo.png" alt="Iowa Map" /></span>
             <h1 id="logotype" class="f-tan-light normal f-base-s f3-m f3-l serif">Peoples' Weather Map</h1>
             <a class="hamburger" data-toggle=".show-menu" href="#"><span></span></a>
@@ -63,22 +67,22 @@
                 <nav id="main-nav">
                     <ul>
                         <li>
-                            <a href="index.php" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
+                            <a href=<?php echo '"' . get_home_url(). '"';?> class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="media-obj media-obj--center" id="nav-weather-stories"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--stories"></use></svg></span><span class="media-obj--body">Weather Stories</span></a>
                         </li>
                         <li>
-                            <a href="hazards" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span><span class="media-obj--body">Weather Hazards</span></a>
+                            <a href=<?php echo '"' . get_home_url(). '/hazards"';?> class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span><span class="media-obj--body">Weather Hazards</span></a>
                         </li>
                         <li>
-                            <a href="climate" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--climate"></use></svg></span><span class="media-obj--body">Climate</span></a>
+                            <a href=<?php echo '"' . get_home_url(). '/climate"';?> class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--climate"></use></svg></span><span class="media-obj--body">Climate</span></a>
                         </li>
                         <li>
-                            <a href="about" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--about"></use></svg></span><span class="media-obj--body">About Us</span></a>
+                            <a href=<?php echo '"' . get_home_url(). '/about"';?> class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--about"></use></svg></span><span class="media-obj--body">About Us</span></a>
                         </li>
                         <li>
-                            <a href="get-involved" class="media-obj media-obj--center nav--get-involved"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--involved"></use></svg></span><span class="media-obj--body">Get Involved</span></a>
+                            <a href=<?php echo '"' . get_home_url(). '/get-involved"';?> class="media-obj media-obj--center nav--get-involved"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--involved"></use></svg></span><span class="media-obj--body">Get Involved</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -108,7 +112,7 @@
                                 ) );
 
                                 foreach ($counties as $county) {
-                                    echo '<option value="county/' . $county->slug . '">' . $county->name . '</option>';
+                                    echo '<option value="' . get_home_url() . '/county/' . $county->slug . '">' . $county->name . '</option>';
                                 }
 
                                 ?> 
@@ -131,7 +135,7 @@
                                 ) );
 
                                 foreach ($regions as $region) {
-                                    echo '<option value="region/' . $region->slug . '">' . $region->name . '</option>';
+                                    echo '<option value="' . get_home_url() . '/region/' . $region->slug . '">' . $region->name . '</option>';
                                 }
 
                                 ?> 
@@ -154,7 +158,7 @@
                                 ) );
 
                                 foreach ($hazards as $hazard) {
-                                    echo '<option value="hazard/' . $hazard->slug . '">' . $hazard->name . '</option>';
+                                    echo '<option value="' . get_home_url() . '/hazard/' . $hazard->slug . '">' . $hazard->name . '</option>';
                                 }
 
                                 ?>                                     

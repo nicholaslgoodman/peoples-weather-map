@@ -11,7 +11,13 @@
 
 ?>
 <?php wp_footer(); ?>
-
+<footer>
+                    <div class="wrapper">
+                        <small>&copy; 2017 Peoples' Weather Map</small>
+                    </div><!-- end wrapper -->
+                </footer>
+        
+        </main>
 </body>
 
 </html>

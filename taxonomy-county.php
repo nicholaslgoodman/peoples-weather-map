@@ -7,12 +7,8 @@
  * @package pwmap
  */
 
-get_header('tax'); ?>
-
-
-
+get_header(); ?>
 	<main>  
-
         <section class="narrative-track map-bg">
         <div class="wrapper">
             
@@ -35,8 +31,11 @@ get_header('tax'); ?>
 		function customQuery($hazard, $county) {
 
 			if ($hazard != 'all'){
-				$args = array(
-                    'post_type' => 'post',
+				$args = array(  
+					'post_type' => 'post',
+					'meta_key' => 'Event Date',
+                    'orderby' => 'meta_value_num',
+					'order'   => 'ASC',
                     'tax_query' => array(
                         'relation' => 'AND',
                         array(
@@ -55,7 +54,11 @@ get_header('tax'); ?>
 			}
 			else{
 				$args = array(
-                    'post_type' => 'post',
+					'post_type' => 'post',
+                    'meta_key' => 'Event Date',
+                    'orderby' => 'meta_value_num',
+					'order'   => 'ASC',
+                    
                     'tax_query' => array(
                         array(
                             'taxonomy' => 'county',
@@ -70,13 +73,13 @@ get_header('tax'); ?>
 			return new WP_Query( $args);
 		}
 		$all_posts = array(
-		    'all' => customQuery('all', $term->slug),
-		    'flood' => customQuery('flood', $term->slug),
-		    'drought' => customQuery('drought', $term->slug),
-		    'insects' => customQuery('insects', $term->slug),
-		    'heat' => customQuery('heat', $term->slug),
-		    'blizzard' => customQuery('blizzard', $term->slug),
-		    'tornado' => customQuery('tornado', $term->slug)
+		    'All' => customQuery('all', $term->slug),
+		    'Flood' => customQuery('flood', $term->slug),
+		    'Drought' => customQuery('drought', $term->slug),
+		    'Insects' => customQuery('insects', $term->slug),
+		    'Heat' => customQuery('heat', $term->slug),
+		    'Blizzard' => customQuery('blizzard', $term->slug),
+		    'Tornado' => customQuery('tornado', $term->slug)
 		);
 		//print_r( array_keys($all_posts));
 	//print_r (var_dump($all_posts['all']));
@@ -84,25 +87,28 @@ get_header('tax'); ?>
 		// $hazards = array_keys($all_posts);	
 
 		foreach ( array_keys($all_posts) as $key ) {
-			echo '<li class="' . $key . '"><a href="" data-toggle="' . $key . '">' . $key . ' <span>';
+			echo '<li class="' . strtolower($key) . '"><a href="" data-toggle="' . strtolower($key) . '">' . $key . ' <span>';
 			//echo var_dump($all_posts[$hazard]);
 			echo $all_posts[$key]->post_count;
 			echo '</span></a></li>';
-		}
-		echo '</ul>
-			<div class="nt-stories">';
-		array_splice($all_posts, 0, 1);
+		} ?>
+		</ul>
+		<div class="nt-stories">
+		<?php
+		//array_splice($all_posts, 0, 1);
 		//print_r (array_keys($all_posts));
-		foreach ( array_keys($all_posts) as $key ) {
+	//	foreach ( array_keys($all_posts) as $key ) {
 //print_r (array_keys((array)$all_posts[$key]));
-    		foreach ($all_posts[$key]->posts as $single){
+    		foreach ($all_posts['All']->posts as $single){
 				setup_postdata($single);
-				echo '<div class="nt-card ' . $key . '" data-hazard="' . $key . '">
-                <div class="img-wrap">
-                    <div class="nt-arrow"></div>
-                    <img src="img/nt-holder.jpg" alt="" />
-                    <span class="nt-category">' . $key . '</span>
-                </div>';
+				$hazard  = wp_get_post_terms( $single->ID, 'hazard');
+				echo '<div class="nt-card ' . $hazard[0]->slug . '" data-hazard="' . $hazard[0]->slug . '">'; ?>
+                <div class="img-wrap"> 
+                	<?php echo get_the_post_thumbnail($single, 'archive'); ?>
+                <div class="nt-arrow"></div><img src="img/nt-holder.jpg" alt="" />
+                <?php echo '<span class="nt-category">' . $hazard[0]->name . '</span>';
+
+                echo '</div>';
         		
         		echo '<div class="nt-info"> 
                     <h2 class="f3">';
@@ -118,14 +124,15 @@ get_header('tax'); ?>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
-		                    <span class="timeline-date">'. get_the_modified_date('Y') . '</span>
+		                    <span class="timeline-date">'. get_post_custom_values('Event Date', $single->ID)[0] . '</span>
 		                </div>
 	                
                  </div> <!-- end .nt-info -->                 
                                     
               </div> <!-- end .nt-card -->';
             }
-		}
+	//	}
+//get_the_date('Y',$single)
              ?>
 
             </div><!-- end .nt-stories -->
@@ -142,13 +149,7 @@ get_header('tax'); ?>
                     </div><!-- end .wrapper -->
                 </section><!-- end .narrative-track -->
 
-                <footer>
-                    <div class="wrapper">
-                        <small>&copy; 2017 Peoples' Weather Map</small>
-                    </div><!-- end wrapper -->
-                </footer>
-        
-        </main>
+
     
         <section id="article-loader">
             <div id="al-top">
@@ -158,10 +159,10 @@ get_header('tax'); ?>
             <div id="al-overflow">
                 <div id="al-article"></div>
                 <div id="al-bottom">
-                    <a href="javascript:void(0);" class="x-text">Back to Johnson County Page</a>
+                    <a href="javascript:void(0);" class="x-text">Back to X County Page</a>
                     <div>
-                        <a href="" class="btn btn-reverse" id="al-hazard">Learn More About Floods &raquo;</a>
-                        <a href="" class="btn btn-primary ml2" id="al-next">Read Next Story In Johnson County &raquo;</a>
+                        <a href="" class="btn btn-reverse" id="al-hazard">Learn More About X &raquo;</a>
+                        <a href="" class="btn btn-primary ml2" id="al-next">Read Next Story In X County &raquo;</a>
                     </div>
                 </div>
             </div>

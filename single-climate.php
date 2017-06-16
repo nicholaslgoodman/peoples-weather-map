@@ -6,7 +6,7 @@
  *
  * @package pwmap
  */
-get_header('tax');
+get_header();
 echo '<main><section class="article-page map-bg"><div class="wrapper">';
 
 while ( have_posts() ) : the_post();

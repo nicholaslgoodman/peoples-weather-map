@@ -67,6 +67,8 @@ function pwmap_setup() {
 
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
+
+	add_image_size( 'archive', 600, 322 );
 }
 endif;
 add_action( 'after_setup_theme', 'pwmap_setup' );
@@ -138,6 +140,16 @@ add_action( 'after_setup_theme', 'register_pwm_custom_post_types');
 /* Flush rewrite rules for custom post types. */
 add_action( 'after_switch_theme', 'flush_rewrite_rules' );
 
+function set_default_meta($post_ID){
+    $current_field_value = get_post_meta($post_ID,'Event Date',true);
+    $default_meta = '12251999'; // value
+    if ($current_field_value == '' && !wp_is_post_revision($post_ID)){
+            add_post_meta($post_ID,'Event Date',$default_meta,true);
+    }
+    return $post_ID;
+}
+add_action('wp_insert_post','set_default_meta');
+
 /* 
  * Register county terms for county taxonomies
  */
@@ -158,7 +170,8 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 function new_excerpt_more( $more ) 
 {
-return '... <a class="read-more" href="'. get_permalink( get_the_ID() ) . '">read more</a>';
+//return '... <a class="read-more" href="'. get_permalink( get_the_ID() ) . '">read more</a>';
+	return '...';
 }
 add_filter( 'excerpt_more', 'new_excerpt_more' );
 

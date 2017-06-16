@@ -6,7 +6,7 @@
  *
  * @package pwmap
  */
-get_header('article');
+get_header();
 echo '<main><section class="article-page map-bg"><div class="wrapper">';
 
 $args = array( 'post_type' => 'hazards', 'posts_per_page' => -1 );
@@ -18,7 +18,10 @@ the_title('<h1 class="f2">', '</h1>');
 
   echo '<div class="entry-content">';
   the_excerpt();
-  echo '</div></article>';
+  echo '</div>  <a href=';
+  the_permalink();
+  echo '> read now</a></article>';
 endwhile;	
-echo '<!-- end .wrapper --></section><!-- end #home-main --></div><!-- #primary -->';
+echo '</div><!-- end .wrapper -->
+                </section><!-- end #home-main -->';
 get_footer();

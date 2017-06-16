@@ -63,13 +63,13 @@
                 <nav id="main-nav">
                     <ul>
                         <li>
-                            <a href="../../" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
+                            <a href= <?php echo '"' . get_home_url(). '"';?> class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--home"></use></svg></span><span class="media-obj--body">Home</span></a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="media-obj media-obj--center" id="nav-weather-stories"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--stories"></use></svg></span><span class="media-obj--body">Weather Stories</span></a>
                         </li>
                         <li>
-                            <a href="../../hazards" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span><span class="media-obj--body">Weather Hazards</span></a>
+                            <a href=<?php echo '"' . get_home_url(). '/hazards"';?> class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--hazards"></use></svg></span><span class="media-obj--body">Weather Hazards</span></a>
                         </li>
                         <li>
                             <a href="../../climate" class="media-obj media-obj--center"><span class="media-obj--figure icon"><svg aria-hidden="true"><use xlink:href="#icon--climate"></use></svg></span><span class="media-obj--body">Climate</span></a>

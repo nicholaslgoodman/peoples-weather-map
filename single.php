@@ -7,7 +7,7 @@
  * @package pwmap
  */
 
-get_header('article'); ?>
+get_header(); ?>
 
 <main>
 

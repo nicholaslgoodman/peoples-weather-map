@@ -8,7 +8,24 @@
  */
 
   get_header(); ?>
+<?php
+$args = array(
+    'post_type' => 'post',
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'region',
+            'field'    => 'slug',
+            'operator' => 'EXISTS'
+        )
+    )
+    
+);
 
+$stories = new WP_Query( $args );
+//print_r($stories);
+$num_stories = $stories->post_count;
+
+?>
 
 <main>            
             
@@ -21,7 +38,9 @@
                         <ul id="hero--article-stats">
                             <li><span class="has-num">99</span><span class="has-desc">counties</span></li>
                             <li><span class="has-num">6</span><span class="has-desc">weather hazards</span></li>
-                            <li><span class="has-num">99</span><span class="has-desc">stories</span><span id="has-growing">and growing!</span></li>
+                            <li><span class="has-num">
+                            <?php echo $num_stories; ?>
+                            </span><span class="has-desc">stories</span><span id="has-growing">and growing!</span></li>
                         </ul>
                     </div><!-- end wrapper -->
                 </section><!-- end #hero -->
@@ -148,20 +167,20 @@
                                         $queryInsects = new WP_Query( $argsInsects );
                                         $queryBlizzard = new WP_Query( $argsBlizzard );
                                         $queryHeat = new WP_Query( $argsHeat );
-                                        $queryTornado = new WP_Query( $argsTornado );
+                                        $queryTornado = new WP_Query( $argsTornado );   
                                         ?>
                                         <div class="col-sm-50 col-md-33 col-lg-16 drought">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="drought" />
                                             <h4>Drought</h4>
                                             <p class="f-small"><span><?php echo $queryDrought->post_count; ?> </span> stories</p>
-                                            <a href="hazard/drought" class="btn">read now &raquo;</a>
+                                            <a href=<?php echo '"' . get_home_url() . '/hazard/drought"';?> class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 flood">
                                             <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="flood" />
                                             <h4>Flood</h4>
                                             <p class="f-small"><span><?php echo $queryFlood->post_count; ?></span> stories</p>
-                                            <a href="hazard/flood" class="btn">read now &raquo;</a>
+                                            <a href=<?php echo '"' . get_home_url() . '/hazard/flood"';?> class="btn">read now &raquo;</a>
                                         </div><!-- end .col -->
                                         
                                         <div class="col-sm-50 col-md-33 col-lg-16 insects">
@@ -210,13 +229,7 @@
                 </section><!-- end #home-main -->
 
 
-                <footer>
-                    <div class="wrapper">
-                        <small>&copy; 2017 Peoples' Weather Map</small>
-                    </div><!-- end wrapper -->
-                </footer>
-        
-        </main>
+     
         
 
         
@@ -230,9 +243,9 @@
         <script src="http://d3js.org/queue.v1.min.js"></script>
         
         <script>
-            
-       var stories = [
-            <?php    
+         var stories = [
+<?php
+              
                 // $terms = get_terms( array(
                 // 'taxonomy' => 'county',
                 // 'hide_empty' => false,
@@ -356,6 +369,9 @@
                     $queryBlizzard = new WP_Query( $argsBlizzard );
                     $queryHeat = new WP_Query( $argsHeat );
                     $queryTornado = new WP_Query( $argsTornado );
+
+                    
+           
                     echo '{
                             county: \'' . $term->slug . '\', 
                             countySafe: \''. $term->slug . '\', 
@@ -381,45 +397,12 @@
                     endif;
                     echo']
                          },';
+                
+              
+       
                 }
-            ?>  
-       ];
-
-        // var stories = [
-        //     {
-        //         county: 'Johnson',
-        //         countySafe: 'johnson',
-        //         countTotal: 16,
-        //         hazards: [
-        //             {hazard: 'drought',count: 5},
-        //             {hazard: 'flood',count: 8},
-        //             {hazard: 'tornado',count: 3}
-        //         ]
-        //     },
-        //     {
-        //         county: 'Black Hawk',
-        //         countySafe: 'black-hawk',
-        //         countTotal: 4,
-        //         hazards: [
-        //             {hazard: 'insects',count: 2},
-        //             {hazard: 'heat',count: 2}
-        //         ]
-        //     },
-        //     {
-        //         county: "O'Brien",
-        //         countySafe: 'obrien',
-        //         countTotal: 9,
-        //         hazards: [
-        //             {hazard: 'blizzard',count: 5},
-        //             {hazard: 'flood',count: 3},
-        //             {hazard: 'tornado',count: 1}
-        //         ]
-        //     }
-            
-        // ];
-          
-        
-            
+?>
+];     
         var IowaMap = function(el,data){
             var self = this;
             this.el = d3.select(el);
@@ -653,7 +636,7 @@
                 }); 
             
 
-        
+       
         </script>
 
 
