@@ -6,7 +6,6 @@
  *
  * @package pwmap
  */
-
 if ( ! function_exists( 'pwmap_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -16,6 +15,10 @@ if ( ! function_exists( 'pwmap_setup' ) ) :
  * as indicating support for post thumbnails.
  */
 function pwmap_setup() {
+    
+    // turn off admin bar when logged in and on front-end
+    add_filter('show_admin_bar', '__return_false');
+    
 	/*
 	 * Make theme available for translation.
 	 * Translations can be filed in the /languages/ directory.
@@ -40,7 +43,7 @@ function pwmap_setup() {
 	 *
 	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 	 */
-	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'post-thumbnails', array('post','climate','hazards') );
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(

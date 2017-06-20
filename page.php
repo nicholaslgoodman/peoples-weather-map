@@ -22,7 +22,7 @@ get_header(); ?>
 		while ( have_posts() ) : the_post(); ?>
 
 			
-		<article id="article" class="article-page">
+		<article>
 
                             <h1 class="f2"> <?php the_title('<h1 class="post-title">', '</h1>'); ?> </h1>
 

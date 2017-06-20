@@ -1,5 +1,6 @@
 .article-page {
     padding-top: 1rem;
+    min-height: calc(100vh - 50px);
     
     h1 {
         text-align: center;
@@ -45,4 +46,20 @@
         margin-bottom: .5rem;
     }
     
+}
+
+.article-page-alt {
+    padding-top: 1rem;
+    min-height: calc(100vh - 50px);
+    h1 {
+        text-align: left;
+    }
+}
+
+.box {
+    border: 1px solid $linework;
+    border-radius: 2px;
+    background-color: rgba(255,255,255,.7);
+    padding: 1em;
+    margin-bottom: 2em;
 }

@@ -1,0 +1,37 @@
+#hm-hazards.archive-hazards {
+    
+    
+    
+}
+
+.media-card > * {
+    margin: 0!important;
+    text-align: left;
+}
+
+
+
+.climate-list {
+    color: $accent;
+    display: flex;
+    margin:0;
+    padding: 0;
+    list-style-position: inside;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 1em;
+    
+    li {
+        width: 100%;
+        margin:0 0 1em;
+        position: relative;
+        text-indent: 0;
+        width:33.33%;
+        margin-bottom: 2em;
+        
+        span {
+            left: -15px;
+            position: relative;
+        }
+    }
+}

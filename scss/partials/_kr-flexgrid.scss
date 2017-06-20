@@ -3,7 +3,7 @@
     margin-left: -0.5rem;
     margin-right: -0.5rem;
     flex-wrap: wrap;
-    width: 100%;
+    width: auto;
 }
 
 
@@ -24,8 +24,10 @@
 }
 
 .col-sm-100 {
-    flex-basis: calc(100% - 1rem);
-    max-width: calc(100% - 1rem);
+    flex-basis: 100%;
+    max-width: 100%;
+//    flex-basis: calc(100% - 1rem);
+//    max-width: calc(100% - 1rem);
 }
 
 .col-sm-66 {
@@ -43,7 +45,7 @@
     max-width: calc(33.33% - 1rem);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
     .col-md-100 {
         flex-basis: calc(100% - 1rem);
         max-width: calc(100% - 1rem);
@@ -65,8 +67,10 @@
     }
 
 }
+
+/********* FOR PWM - THE FIXED SIDEBAR IS 300px WIDE, so min width is changed to 1200px instead of my usual 900px) **/
     
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
     .col-lg-100 {
         flex-basis: calc(100% - 1rem);
         max-width: calc(100% - 1rem);
