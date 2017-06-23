@@ -9,241 +9,236 @@
 
   get_header(); ?>
 <?php
-$args = array(
-    'post_type' => 'post',
-    'tax_query' => array(
-        array(
-            'taxonomy' => 'region',
-            'field'    => 'slug',
-            'operator' => 'EXISTS'
+    $args = array(
+        'post_type' => 'post',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'region',
+                'field'    => 'slug',
+                'operator' => 'EXISTS'
+            )
         )
-    )
-    
-);
+        
+    );
 
-$stories = new WP_Query( $args );
-//print_r($stories);
-$num_stories = $stories->post_count;
+    $stories = new WP_Query( $args );
+    //print_r($stories);
+    $num_stories = $stories->post_count;
 
 ?>
 
 <main>            
             
-                <section id="hero">
-                    <div class="wrapper">
-                        <hgroup>
-                            <h1 class="f-headline">Sharing Weather Hazard Stories Of Iowa’s Past And Present</h1>
-                            <h2 class="f-subheadline">To Remember Our Resilience In The Future.</h2>
-                        </hgroup>
-                        <ul id="hero--article-stats">
-                            <li><span class="has-num">99</span><span class="has-desc">counties</span></li>
-                            <li><span class="has-num">6</span><span class="has-desc">weather hazards</span></li>
-                            <li><span class="has-num">
-                            <?php echo $num_stories; ?>
-                            </span><span class="has-desc">stories</span><span id="has-growing">and growing!</span></li>
-                        </ul>
-                    </div><!-- end wrapper -->
-                </section><!-- end #hero -->
+    <section id="hero">
+        <div class="wrapper">
+            <hgroup>
+                <h1 class="f-headline">Sharing Weather Hazard Stories Of Iowa’s Past And Present</h1>
+                <h2 class="f-subheadline">To Remember Our Resilience In The Future.</h2>
+            </hgroup>
+            <ul id="hero--article-stats">
+                <li><span class="has-num">99</span><span class="has-desc">counties</span></li>
+                <li><span class="has-num">6</span><span class="has-desc">weather hazards</span></li>
+                <li><span class="has-num">
+                <?php echo $num_stories; ?>
+                </span><span class="has-desc">stories</span><span id="has-growing">and growing!</span></li>
+            </ul>
+        </div><!-- end wrapper -->
+    </section><!-- end #hero -->
 
 
-                <section id="home-main" class="map-bg">
-                    <div class="wrapper">
-                        
-                        
-                        <div id="home-map">
-                        
-                            <div id="hm-intro" class="pt4 pb4">
-                                <h2 class="relative pin-before dib">Stories of Iowa Weather</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat ipsum nec massa imperdiet accumsan. Ut ullamcorper et risus sit amet porttitor. Pellentesque quis auctor dolor. Integer tempor mi a condimentum iaculis. Nam auctor accumsan arcu, eget ornare magna viverra in. </p>
-                            </div>
+    <section id="home-main" class="map-bg">
+        <div class="wrapper">
+            
+            
+            <div id="home-map">
+            
+                <div id="hm-intro" class="pt4 pb4">
+                    <h2 class="relative pin-before dib">Stories of Iowa Weather</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat ipsum nec massa imperdiet accumsan. Ut ullamcorper et risus sit amet porttitor. Pellentesque quis auctor dolor. Integer tempor mi a condimentum iaculis. Nam auctor accumsan arcu, eget ornare magna viverra in. </p>
+                </div>
+                
+                <div id="iowa-map"></div>
+                
+                <div id="hm-nav" class="mb4">
+                    
+                    <h3 class="f3-alt">Explore stories by county or region</h3>
+                    <div class="flex-row mb4">
+
+                        <div class="col-sm-100 col-md-50 col-lg-50">
+                            <h3 class="f5">Select a county</h3>
+                            <select class="county-search input-reset" data-placeholder="Select a county" style="width:100%;">
+                                <option></option>
+                  <?php
+
+                     $counties = get_terms( array(
+                        'taxonomy' => 'county',
+                        'hide_empty' => false,
+                    ) );
+
+                    foreach ($counties as $county) {
+                        echo '<option value="county/' . $county->slug . '">' . $county->name . '</option>';
+                    }
+
+                    ?> 
+                            </select>
+                        </div><!-- end .col -->
+
+                        <div class="col-sm-100 col-md-50 col-lg-50">
+                            <h3 class="f5">Select a region</h3>
+                            <select class="styled-select input-reset" data-placeholder="Select a region" style="width:100%;">
+                                <option></option>
+                  <?php
+
+                     $regions = get_terms( array(
+                        'taxonomy' => 'region',
+                        'hide_empty' => false,
+                    ) );
+
+                    foreach ($regions as $region) {
+                        echo '<option value="region/' . $region->slug . '">' . $region->name . '</option>';
+                    }
+
+                    ?> 
+                            </select>
+                        </div><!-- end .col -->
+
+                    </div><!-- end .flex-row -->
+                    
+                    <div id="hm-hazards">
+                        <div class="flex-row">
+                        <?php
+                            $argsDrought = array(
+                            'post_type' => 'post',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'hazard',
+                                    'field'    => 'slug',
+                                    'terms'    => 'drought',
+                                ))
+                            );
+                            $argsFlood = array(
+                            'post_type' => 'post',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'hazard',
+                                    'field'    => 'slug',
+                                    'terms'    => 'flood',
+                                ))
+                            );
+                           $argsInsects = array(
+                            'post_type' => 'post',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'hazard',
+                                    'field'    => 'slug',
+                                    'terms'    => 'insects',
+                                ))
+
+                            );
+                          $argsBlizzard = array(
+                            'post_type' => 'post',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'hazard',
+                                    'field'    => 'slug',
+                                    'terms'    => 'blizzard',
+                                ))
+                            );
+                             $argsHeat = array(
+                            'post_type' => 'post',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'hazard',
+                                    'field'    => 'slug',
+                                    'terms'    => 'heat',
+                                ))
+                            );
+                            $argsTornado = array(
+                            'post_type' => 'post',
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'hazard',
+                                    'field'    => 'slug',
+                                    'terms'    => 'tornado',
+                                ))
+                            );
+                            $queryDrought = new WP_Query( $argsDrought );
+                            $queryFlood = new WP_Query( $argsFlood );
+                            $queryInsects = new WP_Query( $argsInsects );
+                            $queryBlizzard = new WP_Query( $argsBlizzard );
+                            $queryHeat = new WP_Query( $argsHeat );
+                            $queryTornado = new WP_Query( $argsTornado );   
+                            ?>
+                            <div class="col-sm-50 col-md-33 col-lg-16 drought">
+                                <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="drought" />
+                                <h4>Drought</h4>
+                                <p class="f-small"><span><?php echo $queryDrought->post_count; ?> </span> stories</p>
+                                <a href=<?php echo '"' . get_home_url() . '/hazard/drought"';?> class="btn">read now &raquo;</a>
+                            </div><!-- end .col -->
                             
-                            <div id="iowa-map"></div>
+                            <div class="col-sm-50 col-md-33 col-lg-16 flood">
+                                <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="flood" />
+                                <h4>Flood</h4>
+                                <p class="f-small"><span><?php echo $queryFlood->post_count; ?></span> stories</p>
+                                <a href=<?php echo '"' . get_home_url() . '/hazard/flood"';?> class="btn">read now &raquo;</a>
+                            </div><!-- end .col -->
                             
-                            <div id="hm-nav" class="mb4">
-                                
-                                <h3 class="f3-alt">Explore stories by county or region</h3>
-                                <div class="flex-row mb4">
-
-                                    <div class="col-sm-100 col-md-50 col-lg-50">
-                                        <h3 class="f5">Select a county</h3>
-                                        <select class="county-search input-reset" data-placeholder="Select a county" style="width:100%;">
-                                            <option></option>
-                              <?php
-
-                                 $counties = get_terms( array(
-                                    'taxonomy' => 'county',
-                                    'hide_empty' => false,
-                                ) );
-
-                                foreach ($counties as $county) {
-                                    echo '<option value="county/' . $county->slug . '">' . $county->name . '</option>';
-                                }
-
-                                ?> 
-                                        </select>
-                                    </div><!-- end .col -->
-
-                                    <div class="col-sm-100 col-md-50 col-lg-50">
-                                        <h3 class="f5">Select a region</h3>
-                                        <select class="styled-select input-reset" data-placeholder="Select a region" style="width:100%;">
-                                            <option></option>
-                              <?php
-
-                                 $regions = get_terms( array(
-                                    'taxonomy' => 'region',
-                                    'hide_empty' => false,
-                                ) );
-
-                                foreach ($regions as $region) {
-                                    echo '<option value="region/' . $region->slug . '">' . $region->name . '</option>';
-                                }
-
-                                ?> 
-                                        </select>
-                                    </div><!-- end .col -->
-
-                                </div><!-- end .flex-row -->
-                                
-                                <div id="hm-hazards">
-                                    <div class="flex-row">
-                                    <?php
-                                        $argsDrought = array(
-                                        'post_type' => 'post',
-                                        'tax_query' => array(
-                                            array(
-                                                'taxonomy' => 'hazard',
-                                                'field'    => 'slug',
-                                                'terms'    => 'drought',
-                                            ))
-                                        );
-                                        $argsFlood = array(
-                                        'post_type' => 'post',
-                                        'tax_query' => array(
-                                            array(
-                                                'taxonomy' => 'hazard',
-                                                'field'    => 'slug',
-                                                'terms'    => 'flood',
-                                            ))
-                                        );
-                                       $argsInsects = array(
-                                        'post_type' => 'post',
-                                        'tax_query' => array(
-                                            array(
-                                                'taxonomy' => 'hazard',
-                                                'field'    => 'slug',
-                                                'terms'    => 'insects',
-                                            ))
-
-                                        );
-                                      $argsBlizzard = array(
-                                        'post_type' => 'post',
-                                        'tax_query' => array(
-                                            array(
-                                                'taxonomy' => 'hazard',
-                                                'field'    => 'slug',
-                                                'terms'    => 'blizzard',
-                                            ))
-                                        );
-                                         $argsHeat = array(
-                                        'post_type' => 'post',
-                                        'tax_query' => array(
-                                            array(
-                                                'taxonomy' => 'hazard',
-                                                'field'    => 'slug',
-                                                'terms'    => 'heat',
-                                            ))
-                                        );
-                                        $argsTornado = array(
-                                        'post_type' => 'post',
-                                        'tax_query' => array(
-                                            array(
-                                                'taxonomy' => 'hazard',
-                                                'field'    => 'slug',
-                                                'terms'    => 'tornado',
-                                            ))
-                                        );
-                                        $queryDrought = new WP_Query( $argsDrought );
-                                        $queryFlood = new WP_Query( $argsFlood );
-                                        $queryInsects = new WP_Query( $argsInsects );
-                                        $queryBlizzard = new WP_Query( $argsBlizzard );
-                                        $queryHeat = new WP_Query( $argsHeat );
-                                        $queryTornado = new WP_Query( $argsTornado );   
-                                        ?>
-                                        <div class="col-sm-50 col-md-33 col-lg-16 drought">
-                                            <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="drought" />
-                                            <h4>Drought</h4>
-                                            <p class="f-small"><span><?php echo $queryDrought->post_count; ?> </span> stories</p>
-                                            <a href=<?php echo '"' . get_home_url() . '/hazard/drought"';?> class="btn">read now &raquo;</a>
-                                        </div><!-- end .col -->
-                                        
-                                        <div class="col-sm-50 col-md-33 col-lg-16 flood">
-                                            <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="flood" />
-                                            <h4>Flood</h4>
-                                            <p class="f-small"><span><?php echo $queryFlood->post_count; ?></span> stories</p>
-                                            <a href=<?php echo '"' . get_home_url() . '/hazard/flood"';?> class="btn">read now &raquo;</a>
-                                        </div><!-- end .col -->
-                                        
-                                        <div class="col-sm-50 col-md-33 col-lg-16 insects">
-                                            <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="insects" />
-                                            <h4>Insects</h4>
-                                            <p class="f-small"><span><?php echo $queryInsects->post_count; ?></span> stories</p>
-                                            <a href="hazard/insects" class="btn">read now &raquo;</a>
-                                        </div><!-- end .col -->
-                                        
-                                        <div class="col-sm-50 col-md-33 col-lg-16 heat">
-                                            <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="heat" />
-                                            <h4>Heat</h4>
-                                            <p class="f-small"><span><?php echo $queryHeat->post_count; ?></span> stories</p>
-                                            <a href="hazard/heat" class="btn">read now &raquo;</a>
-                                        </div><!-- end .col -->
-                                        
-                                        <div class="col-sm-50 col-md-33 col-lg-16 blizzard">
-                                            <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="blizzard" />
-                                            <h4>Blizzard</h4>
-                                            <p class="f-small"><span><?php echo $queryBlizzard->post_count; ?></span> stories</p>
-                                            <a href="hazard/blizzard" class="btn">read now &raquo;</a>
-                                        </div><!-- end .col -->
-                                        
-                                        <div class="col-sm-50 col-md-33 col-lg-16 tornado">
-                                            <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="tornado" />
-                                            <h4>Tornado</h4>
-                                            <p class="f-small"><span><?php echo $queryTornado->post_count; ?></span> stories</p>
-                                            <a href="hazard/tornado" class="btn">read now &raquo;</a>
-                                        </div><!-- end .col -->
-                                        
-                                    </div><!-- end .flex-row -->
-                                </div><!-- end #hm-hazards -->
-                                
-                            </div><!-- end #hm-nav -->
+                            <div class="col-sm-50 col-md-33 col-lg-16 insects">
+                                <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="insects" />
+                                <h4>Insects</h4>
+                                <p class="f-small"><span><?php echo $queryInsects->post_count; ?></span> stories</p>
+                                <a href="hazard/insects" class="btn">read now &raquo;</a>
+                            </div><!-- end .col -->
                             
-                        </div><!-- end #home-map -->
-                        
-                        <div id="home-get-involved" class="pwm-box mb4">
-                            <h5 class="f3">Help get more stories on the map</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat ipsum nec massa imperdiet accumsan. Ut ullamcorper et risus sit amet porttitor. Pellentesque quis auctor dolor. Integer tempor mi a condimentum iaculis. Nam auctor accumsan arcu, eget ornare magna viverra in. </p>
-                            <a href="get-involved" class="btn btn-primary">Find out how to submit stories for your county &raquo;</a>
-                        </div><!-- end .home-get-involved -->
-                        
-                        
-                    </div><!-- end wrapper -->
-                </section><!-- end #home-main -->
+                            <div class="col-sm-50 col-md-33 col-lg-16 heat">
+                                <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="heat" />
+                                <h4>Heat</h4>
+                                <p class="f-small"><span><?php echo $queryHeat->post_count; ?></span> stories</p>
+                                <a href="hazard/heat" class="btn">read now &raquo;</a>
+                            </div><!-- end .col -->
+                            
+                            <div class="col-sm-50 col-md-33 col-lg-16 blizzard">
+                                <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="blizzard" />
+                                <h4>Blizzard</h4>
+                                <p class="f-small"><span><?php echo $queryBlizzard->post_count; ?></span> stories</p>
+                                <a href="hazard/blizzard" class="btn">read now &raquo;</a>
+                            </div><!-- end .col -->
+                            
+                            <div class="col-sm-50 col-md-33 col-lg-16 tornado">
+                                <img src="<?php bloginfo( 'template_url' ); ?>/img/holder.jpg" alt="tornado" />
+                                <h4>Tornado</h4>
+                                <p class="f-small"><span><?php echo $queryTornado->post_count; ?></span> stories</p>
+                                <a href="hazard/tornado" class="btn">read now &raquo;</a>
+                            </div><!-- end .col -->
+                            
+                        </div><!-- end .flex-row -->
+                    </div><!-- end #hm-hazards -->
+                    
+                </div><!-- end #hm-nav -->
+                
+            </div><!-- end #home-map -->
+            
+            <div id="home-get-involved" class="pwm-box mb4">
+                <h5 class="f3">Help get more stories on the map</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat ipsum nec massa imperdiet accumsan. Ut ullamcorper et risus sit amet porttitor. Pellentesque quis auctor dolor. Integer tempor mi a condimentum iaculis. Nam auctor accumsan arcu, eget ornare magna viverra in. </p>
+                <a href="get-involved" class="btn btn-primary">Find out how to submit stories for your county &raquo;</a>
+            </div><!-- end .home-get-involved -->
+            
+            
+        </div><!-- end wrapper -->
+    </section><!-- end #home-main -->
 
-
-     
-        
-
-        
-        <!-- map -->
-        
-        <script src="https://d3js.org/d3.v4.js"></script>
-        <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
-        <script src="https://d3js.org/d3-path.v1.min.js"></script>
-        <script src="https://d3js.org/d3-shape.v1.min.js"></script>
-        <script src="https://d3js.org/topojson.v2.min.js"></script>
-        <script src="http://d3js.org/queue.v1.min.js"></script>
-        
-        <script>
-         var stories = [
+    <!-- map -->
+    
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+    <script src="https://d3js.org/d3-path.v1.min.js"></script>
+    <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="http://d3js.org/queue.v1.min.js"></script>
+    
+    <script>
+     var stories = [
 <?php
               
                 // $terms = get_terms( array(
