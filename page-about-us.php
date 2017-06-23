@@ -26,8 +26,8 @@ get_header(); ?>
        <section class="tab-wrapper"> 
         <ul class="tabs"> 
 
-            <li class="nt-empty"><a href="#about"><?php echo get_the_title(220); ?></a></li>
-            <li class="nt-empty"><a href="#team"><?php echo get_the_title(222); ?></a></li>
+            <li class="nt-active"><a href="#about"><?php echo get_the_title(220); ?></a></li>
+            <li><a href="#team"><?php echo get_the_title(222); ?></a></li>
             <li><a href="#funders"><?php echo get_the_title(259); ?></a></li>
             <li><a href="#partners"><?php echo get_the_title(261); ?></a></li>
         </ul>
