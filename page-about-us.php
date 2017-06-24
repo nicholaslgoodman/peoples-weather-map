@@ -24,7 +24,7 @@ get_header(); ?>
             If you do, make sure first has class of nt-active
         -->
        <section class="tab-wrapper"> 
-        <ul class="tabs"> 
+        <ul class="nt-tabs"> 
 
             <li class="nt-active"><a href="#about"><?php echo get_the_title(220); ?></a></li>
             <li><a href="#team"><?php echo get_the_title(222); ?></a></li>
@@ -99,6 +99,91 @@ get_header(); ?>
 <!-- ****** WP-LOGIC
             enqueue? Could use a nice way to embed javascript on a template by template basis. All JS should load right before </body> tag
         -->		
+
+ <script>
+        $(function(){
+            
+           /** pull stories up for layout **/
+            // cache nt cards
+            var $cards = $('.nt-card');
+            
+            
+            function pullCards(){
+                var visCards = $cards.filter(function(i,e){
+                    return $(e).is(':visible');
+                });
+                
+                var empty = $('#no-results');
+                
+                if (visCards.length == 0) {
+                    empty.show();
+                } else {
+                    empty.hide();            
+                     visCards.each(function(i,el){
+                        var that = $(this);
+                         that.removeClass('even').removeClass('odd');
+                        if (i!==0){
+                             var prev = $($cards[i-1]),
+                                 prevHeight = prev.height(),
+                                 pull = prevHeight/2;
+
+
+                            that.css('margin-top',-pull + 'px');
+
+                        } else {
+                            that.css('margin-top',0);
+                        }
+
+                        if (i%2 == 1) {
+                            that.addClass('even');
+                        }  else {
+                            that.addClass('odd')
+                        }
+
+
+                    }); //each
+                    
+                }
+            }
+            
+            if (window.innerWidth >= 600) {
+                 pullCards();
+            }
+           
+             /** tabs **/
+            var tabs = $('.nt-tabs li');
+            $('.nt-tabs a').on('click',function(e){
+                e.preventDefault();
+                var that = $(this),
+                    parent = that.parent(),
+                    hazard = that.data('toggle');
+                
+                tabs.removeClass('nt-active');
+                parent.addClass('nt-active');
+                
+                if (hazard == 'all') {
+                    $cards.show();
+                } else {
+                    $cards.each(function(){
+                        if (!$(this).hasClass(hazard)) {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        }
+                    });
+                }
+                
+                
+                
+                if (window.innerWidth >= 600) {
+                     pullCards();
+                }
+                
+            });
+            
+            
+        });
+    </script>        
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $(function(){
