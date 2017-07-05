@@ -8,30 +8,17 @@
  */
 
 get_header(); ?>
+
 	<main>  
+
         <section class="narrative-track map-bg">
-<?php wpgeo_map( array(
-	'post_type' => 'post'
-) ); ?> 
-        <div class="wrapper">
-           
-            <section class="nt-header">
-               
-    			<h1 class="f2">
-					<?php
-					//Display Title
-						$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-						echo strtoupper($term->name) . ' COUNTY';
-					?>
-				</h1>
-            </section>
-            <section class="nt-content">
-                            
-        		<ul class="nt-tabs">  
-        		
- 		<?php
+
+        <?php
+			//Display Title
+			$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+						
 			//Display number of posts with taxonomy term
-		function customQuery($hazard, $county) {
+			function customQuery($hazard, $county) {
 
 			if ($hazard != 'all'){
 				$args = array(  
@@ -84,12 +71,40 @@ get_header(); ?>
 		    'Blizzard' => customQuery('blizzard', $term->slug),
 		    'Tornado' => customQuery('tornado', $term->slug)
 		);
-		//print_r( array_keys($all_posts));
-	//print_r (var_dump($all_posts['all']));
-			//Display number of posts with taxonomy term
-		// $hazards = array_keys($all_posts);	
+		?>
+        <div class="wrapper">
+        <?php
+        foreach ($all_posts['All']->posts as $single){
+        	$ID = $single->ID;
+			$lat = get_wpgeo_latitude( $ID);
+			$long = get_wpgeo_longitude( $ID );
+        	if ($lat==NULL) {
+        		continue;
+        	}
+			/*echo $lat;
+			echo "<br>";
+			echo $long;
+			echo "<br>";   */
+		}
+       ?>
+            <section class="nt-header">
+               
+    			<h1 class="f2">
+					<?php
+					//Display Title
+						
+						echo strtoupper($term->name) . ' COUNTY';
+					?>
+				</h1>
+            </section>
+            <section class="nt-content">
+                            
+        		<ul class="nt-tabs">  
+        		
 
-		foreach ( array_keys($all_posts) as $key ) {
+		<?php
+
+		foreach (array_keys($all_posts) as $key ) {
 			echo '<li class="' . strtolower($key) . '"><a href="" data-toggle="' . strtolower($key) . '">' . $key . ' <span>';
 			//echo var_dump($all_posts[$hazard]);
 			echo $all_posts[$key]->post_count;
@@ -103,7 +118,7 @@ get_header(); ?>
 	//	foreach ( array_keys($all_posts) as $key ) {
 //print_r (array_keys((array)$all_posts[$key]));
     		foreach ($all_posts['All']->posts as $single){
-				setup_postdata($single);
+				// setup_postdata($single);
 				$hazard  = wp_get_post_terms( $single->ID, 'hazard');
 				echo '<div class="nt-card ' . $hazard[0]->slug . '" data-hazard="' . $hazard[0]->slug . '">'; ?>
                 <div class="img-wrap"> 
