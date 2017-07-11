@@ -1,4 +1,4 @@
-$(function(){
+jQuery( document ).ready( function( $ ) {
     
    $('header .hamburger, nav .close-x').on('click',function(){
         var that = $(this);

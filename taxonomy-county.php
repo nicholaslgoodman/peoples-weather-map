@@ -9,28 +9,16 @@
 
 get_header(); ?>
 
-    <!-- ****** WP-TEMPLATE: taxonomy-county.php ************ -->
 	<main>  
+
         <section class="narrative-track map-bg">
-        <div class="wrapper">
-            
-            <section class="nt-header">
-               
-    			<h1 class="f2">
-					<?php
-					//Display Title
-						$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-						echo strtoupper($term->name) . ' COUNTY';
-					?>
-				</h1>
-            </section>
-            <section class="nt-content">
-                            
-        		<ul class="nt-tabs">  
-        		
- 		<?php
+
+        <?php
+			//Display Title
+			$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+						
 			//Display number of posts with taxonomy term
-		function customQuery($hazard, $county) {
+			function customQuery($hazard, $county) {
 
 			if ($hazard != 'all'){
 				$args = array(  
@@ -75,7 +63,7 @@ get_header(); ?>
 			return new WP_Query( $args);
 		}
 		$all_posts = array(
-		    'All' => customQuery('all', $term->slug),
+		    'All' => customQuery('all', $term->slug)	,
 		    'Flood' => customQuery('flood', $term->slug),
 		    'Drought' => customQuery('drought', $term->slug),
 		    'Insects' => customQuery('insects', $term->slug),
@@ -83,16 +71,41 @@ get_header(); ?>
 		    'Blizzard' => customQuery('blizzard', $term->slug),
 		    'Tornado' => customQuery('tornado', $term->slug)
 		);
-		//print_r( array_keys($all_posts));
-	//print_r (var_dump($all_posts['all']));
-			//Display number of posts with taxonomy term
-		// $hazards = array_keys($all_posts);	
+		?>
+        <div class="wrapper">
+        <?php
+        foreach ($all_posts['All']->posts as $single){
+        	$ID = $single->ID;
+			$lat = get_wpgeo_latitude( $ID);
+			$long = get_wpgeo_longitude( $ID );
+        	if ($lat==NULL) {
+        		continue;
+        	}
+			/*echo $lat;
+			echo "<br>";
+			echo $long;
+			echo "<br>";   */
+		}
+       ?>
+            <section class="nt-header">
+               
+    			<h1 class="f2">
+					<?php
+					//Display Title
+						
+						echo strtoupper($term->name) . ' COUNTY';
+					?>
+				</h1>
+            </section>
+            <section class="nt-content">
+                            
+        		<ul class="nt-tabs">  
+        		
 
-		foreach ( array_keys($all_posts) as $key ) {
-			echo '<li class="' . strtolower($key); 
-            if ($key == "All") { echo ' nt-active'; }
-            if ($all_posts[$key]->post_count == 0) { echo ' nt-none'; }
-            echo '"><a href="" data-toggle="' . strtolower($key) . '">' . $key . ' <span>';    
+		<?php
+
+		foreach (array_keys($all_posts) as $key ) {
+			echo '<li class="' . strtolower($key) . '"><a href="" data-toggle="' . strtolower($key) . '">' . $key . ' <span>';
 			//echo var_dump($all_posts[$hazard]);
 			echo $all_posts[$key]->post_count;
 			echo '</span></a></li>';
@@ -105,11 +118,12 @@ get_header(); ?>
 	//	foreach ( array_keys($all_posts) as $key ) {
 //print_r (array_keys((array)$all_posts[$key]));
     		foreach ($all_posts['All']->posts as $single){
-				setup_postdata($single);
+				// setup_postdata($single);
 				$hazard  = wp_get_post_terms( $single->ID, 'hazard');
 				echo '<div class="nt-card ' . $hazard[0]->slug . '" data-hazard="' . $hazard[0]->slug . '">'; ?>
                 <div class="img-wrap"> 
-                	<div class="nt-arrow"></div><?php echo get_the_post_thumbnail($single, 'archive'); ?>
+                	<?php echo get_the_post_thumbnail($single, 'archive'); ?>
+                <div class="nt-arrow"></div><img src="img/nt-holder.jpg" alt="" />
                 <?php echo '<span class="nt-category">' . $hazard[0]->name . '</span>';
 
                 echo '</div>';
@@ -124,7 +138,7 @@ get_header(); ?>
                                         
                     <a href="';
                 the_permalink($single);
-                echo '" class="btn btn-primary">Read Story &raquo;</a>
+                echo '">Read Story &raquo;</a>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
@@ -142,29 +156,11 @@ get_header(); ?>
             </div><!-- end .nt-stories -->
             <div id="no-results" class="nt-empty pa3">
                 <h1 class="f3">We need your stories!</h1>
-                <p>We want to tell weather hazard stories of every county, but we need your help. Go to the <a href="<?php bloginfo('url'); ?>/get-involved">Get Involved</a> page to submit a newspaper clipping, photos, or historical documents that our storytellers can use to help tell this county’s story.</p>
-                <a href="<?php bloginfo('url'); ?>/get-involved" class="btn btn-primary">Find Out How To Get Involved &raquo;</a>
+                <p>We want to tell weather hazard stories of every county, but we need your help. Go to the <a href="get-involved">Get Involved</a> page to submit a newspaper clipping, photos, or historical documents that our storytellers can use to help tell this county’s story.</p>
+                <a href="get-involved" class="btn btn-primary">Find Out How To Get Involved &raquo;</a>
                 
                 <!--<h4 class="f5 mt4">Read Stories In This County</h4>
                 <a href="">Southeast</a>-->
-                
-                <?php if (sizeof($all_posts['All']->posts) == 0) { ?>
-                    <h2 class="f4">Read Similar Stories:</h2>
-                    <ul>
-                        <li>
-                            <!-- ******** WP-LOGIC
-                                    Out put a link to the region this county is in <a href="/region/value">Region</a>
-                            -->
-                        </li>
-                             <!-- ******** WP-LOGIC
-                                    Out put <li>s and links to counties in region that have 1 or more posts
-                            -->
-                
-                    </ul>
-                
-                <?php } ?>
-                
-                
                 
             </div><!-- end .nt-empty -->
         </section><!-- end .nt-content -->
@@ -391,7 +387,7 @@ get_header(); ?>
         });
     
     </script>
-    <!-- ****** END WP-TEMPLATE: taxonomy-county.php ************ -->
+    
 
 <?php
 get_footer();

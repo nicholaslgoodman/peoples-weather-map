@@ -98,10 +98,7 @@ get_header(); ?>
 	
 		<div class="nt-stories">
 		<?php
-		//array_splice($all_posts, 0, 1);
-		//print_r (array_keys($all_posts));
-	//	foreach ( array_keys($all_posts) as $key ) {
-//print_r (array_keys((array)$all_posts[$key]));
+
     		foreach ($all_posts['All']->posts as $single){
 				setup_postdata($single);
 				$hazard  = wp_get_post_terms( $single->ID, 'hazard');
@@ -134,8 +131,7 @@ get_header(); ?>
                                     
               </div> <!-- end .nt-card -->';
             }
-	//	}
-//get_the_date('Y',$single)
+
              ?>
 
             </div><!-- end .nt-stories -->
@@ -152,8 +148,6 @@ get_header(); ?>
                     </div><!-- end .wrapper -->
                 </section><!-- end .narrative-track -->
 
-
-    
         <section id="article-loader">
             <div id="al-top">
                 <a class="close-x" href="#"><span></span></a>

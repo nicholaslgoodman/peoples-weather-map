@@ -169,7 +169,3 @@
                         </div>
                     </div>
             </nav>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="<?php bloginfo( 'template_url' ); ?>/js/lib/chosen.jquery.min.js"></script>
-    <!--        <script src="js/lib/jquery.easy-autocomplete.min.js"></script>-->
-            <script src="<?php bloginfo( 'template_url' ); ?>/js/show-menu.js"></script>
