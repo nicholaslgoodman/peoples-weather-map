@@ -18,11 +18,10 @@ get_header(); ?>
 			
 		<article id="article" class="article-page">
 		<div class="date-wrap"><span class="date"><?php echo get_the_modified_date('Y'); ?></span></div>
-                            <h1 class="f2"> <?php the_title('<h1 class="post-title">', '</h1>'); ?> </h1>
-                            <h2 class="f-small">The University of Iowa, Iowa City, Johnson County, Iowa</h2>
-                            
+                            <h1 class="f2"> <?php the_title(); ?> </h1>
+                            <h2 class="f-small"><?php if (function_exists('wpgeo_title')) { wpgeo_title(); } ?></h2>
+            
 			
-			<img src="img/nt-holder.jpg" alt="" class="fl" />
 			<?php
 			the_content();
 

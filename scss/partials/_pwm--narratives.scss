@@ -26,12 +26,18 @@
             border-left: 0;
         }
         
-        &.nt-active a, &:hover a {
+        &.nt-active a, &:hover a, &.ui-state-active a {
             background-color: transparent;
         }
         
-        &.nt-active a {
+        &.nt-active a, &.ui-state-active a {
             border-bottom: 0;
+        }
+        
+        &.ui-state-active a {
+            border-top: 4px solid $accent;
+            margin-bottom: -4px;
+            font-weight: bold;
         }
     }
     

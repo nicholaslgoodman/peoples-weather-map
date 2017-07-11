@@ -23,6 +23,11 @@
     position: relative;
 }
 
+.col-50 {
+    flex-basis: 50%;
+    max-width: 50%;
+}
+
 .col-sm-100 {
     flex-basis: 100%;
     max-width: 100%;

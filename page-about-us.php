@@ -22,7 +22,7 @@ get_header(); ?>
         -->
        <section class="tab-wrapper"> 
         <ul class="tabs"> 
-            <li class="nt-active"><a href="#about">About PWM</a></li>
+            <li><a href="#about">About PWM</a></li>
             <li><a href="#team">Our Team</a></li>
             <li><a href="#funders">Our Funders</a></li>
             <li><a href="#partners">Our Partners</a></li>

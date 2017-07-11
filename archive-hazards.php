@@ -92,7 +92,14 @@ get_header(); ?>
 $args = array( 'post_type' => 'hazards', 'posts_per_page' => -1 );
 $loop = new WP_Query( $args ); ?>
 
-<div id="hm-hazards" class="archive-hazards">
+<div id="hm-hazards" class="archive-hazards box">
+    
+    <div class="mb4">
+<!--              <h2 class="f3">Weather Hazards</h2>-->
+                <p>The Peoples’ Weather Map interviews scientists ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus, est vel ornare tristique, dolor lorem posuere mi, ut interdum mi sapien ut orci. Duis in justo a neque molestie imperdiet vestibulum ut ex. Vivamus quam augue, semper non hendrerit vitae, fringilla vitae justo. Nulla vulputate tincidunt purus in mollis.</p>
+                </div>
+    
+    
     <div class="flex-row">
 
 
@@ -102,11 +109,11 @@ $loop = new WP_Query( $args ); ?>
                     Enable featured images for hazard custom post type
                     Replace the holder.jpg with image
             -->
-            <div class="col-sm-50 cover bg-center" style="background-image: url(<?php bloginfo( 'template_url' ); ?>/img/holder.jpg)"></div>
-            <div class="col-sm-50 pa3">
+            <div class="col-50 cover bg-center" style="background-image: url(<?php bloginfo( 'template_url' ); ?>/img/holder.jpg)"></div>
+            <div class="col-50 pa3">
                 <h4><?php the_title(); ?></h4>
-                <p class="f-small"><span><?php echo $counts[strtolower(get_the_title())]; ?> </span> stories</p>
-                <a href="<?php echo get_the_permalink(); ?>" class="btn">read now &raquo;</a>
+<!--                <p class="f-small"><span><?php echo $counts[strtolower(get_the_title())]; ?> </span> stories</p>-->
+                <a href="<?php echo get_the_permalink(); ?>" class="btn">read about &raquo;</a>
             </div>
         </div><!-- end .col -->                             
 

@@ -50,10 +50,17 @@ footer {
     border-radius: 2px;
 }
 
+
 a {
     color: $accent;
     
     &:hover {
         color: $accent_hover;
     }
+}
+
+.sep {
+    padding-bottom: 1em;
+    border-bottom: 1px solid $linework;
+    margin-bottom: 2em;
 }

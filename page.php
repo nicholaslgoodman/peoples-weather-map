@@ -13,6 +13,7 @@
  */
 
 get_header(); ?>
+<!-- ******** WP-TEMPLATE: PAGE.PHP ************** -->
 
 <main>
 
