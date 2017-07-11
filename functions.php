@@ -153,6 +153,17 @@ function set_default_meta($post_ID){
 }
 add_action('wp_insert_post','set_default_meta');
 
+/**
+ * Enqueue Scripts
+ */
+function pwm_scripts() {
+	
+    wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', array(), '20170710');
+    wp_enqueue_script( 'chosen', get_template_directory_uri() . '/js/lib/chosen.jquery.min.js', array('jquery'), '20170710');
+    wp_enqueue_script( 'show-menu', get_template_directory_uri() . '/js/show-menu.js', array('jquery'), '20170710' );
+}
+add_action( 'wp_enqueue_scripts', 'pwm_scripts' );
+
 /* 
  * Register county terms for county taxonomies
  */
