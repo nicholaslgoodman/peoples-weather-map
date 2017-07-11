@@ -114,14 +114,16 @@ get_header(); ?>
         		echo '<div class="nt-info"> 
                     <h2 class="f3">';
                 echo get_the_title($single);
-                echo '<h3 class="f-small">The University of Iowa, Iowa City,  Johnson region, Iowa</h3>
+                echo '</h2><h3 class="f-small">';
+                wpgeo_title($single);
+                echo '</h3>
                		<p>';
                 the_excerpt();
                 echo '</p>
                                         
                     <a href="';
                 the_permalink($single);
-                echo '">Read Story &raquo;</a>
+                echo '" class="btn btn-primary">Read Story &raquo;</a>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
