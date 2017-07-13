@@ -42,7 +42,7 @@ get_header(); ?>
         		
  		<?php
 			//Display number of posts with taxonomy term
-		function customQuery($hazard, $hazard) {
+		function customQuery($hazard) {
 
 			if ($hazard != 'all'){
 				$args = array(  
@@ -370,3 +370,4 @@ get_header(); ?>
 
 <?php
 get_footer();
+?>

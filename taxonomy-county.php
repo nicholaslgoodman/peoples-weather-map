@@ -179,10 +179,10 @@ get_header(); ?>
             <div id="al-overflow">
                 <div id="al-article"></div>
                 <div id="al-bottom">
-                    <a href="javascript:void(0);" class="x-text">Back to X County Page</a>
+                    <a href="javascript:void(0);" class="x-text">Back to <?php echo $term->name; ?> County Page</a>
                     <div>
-                        <a href="" class="btn btn-reverse" id="al-hazard">Learn More About X &raquo;</a>
-                        <a href="" class="btn btn-primary ml2" id="al-next">Read Next Story In X County &raquo;</a>
+                        <a href="" class="btn btn-reverse" id="al-hazard">Learn More About <?php echo $term->name; ?> &raquo;</a>
+                        <a href="" class="btn btn-primary ml2" id="al-next">Read Next Story In <?php echo $term->name; ?> County &raquo;</a>
                     </div>
                 </div>
             </div>
