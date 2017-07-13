@@ -105,7 +105,9 @@ get_header(); ?>
 		<?php
 
 		foreach (array_keys($all_posts) as $key ) {
-			echo '<li class="' . strtolower($key) . '"><a href="" data-toggle="' . strtolower($key) . '">' . $key . ' <span>';
+			echo '<li class="' . strtolower($key);
+            if ($key == 'All') { echo ' nt-active'; }
+            echo '"><a href="" data-toggle="' . strtolower($key) . '">' . $key . ' <span>';
 			//echo var_dump($all_posts[$hazard]);
 			echo $all_posts[$key]->post_count;
 			echo '</span></a></li>';
