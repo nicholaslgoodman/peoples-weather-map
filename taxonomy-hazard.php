@@ -34,7 +34,18 @@ get_header(); ?>
 					?>
 				</h1>
 				<span>
-				<?php echo '<a href = "' . get_home_url() . '/hazards/' . $term->slug . '">Read more about ' . $name .'</a>'; ?>
+				<a href = "<?php get_home_url();?>/hazards/<?php $term->slug;?>">Read more about
+                <?php
+                        if ($name != 'Tornado' && $name != 'Insects' && $name != 'Heat'){
+                            echo $term->name . 's';
+                        }
+                        elseif ($name == 'Tornado'){
+                            echo 'Tornadoes';
+                        }
+                        else {
+                            echo $term->name;
+                        }
+                ?></a>
 				</span>
             </section>
             <section class="nt-content">
@@ -87,13 +98,13 @@ get_header(); ?>
 			return new WP_Query( $args);
 		}
 		$all_posts = array(
-		    'All' => customQuery('all', $term->slug),
-		    'Flood' => customQuery('flood', $term->slug),
-		    'Drought' => customQuery('drought', $term->slug),
-		    'Insects' => customQuery('insects', $term->slug),
-		    'Heat' => customQuery('heat', $term->slug),
-		    'Blizzard' => customQuery('blizzard', $term->slug),
-		    'Tornado' => customQuery('tornado', $term->slug)
+		    'All' => customQuery($term->slug),
+		    'Flood' => customQuery($term->slug),
+		    'Drought' => customQuery($term->slug),
+		    'Insects' => customQuery($term->slug),
+		    'Heat' => customQuery($term->slug),
+		    'Blizzard' => customQuery($term->slug),
+		    'Tornado' => customQuery($term->slug)
 		); ?>
 	
 		<div class="nt-stories">
@@ -101,38 +112,36 @@ get_header(); ?>
 
     		foreach ($all_posts['All']->posts as $single){
 				setup_postdata($single);
-				$hazard  = wp_get_post_terms( $single->ID, 'hazard');
-				echo '<div class="nt-card ' . $hazard[0]->slug . '" data-hazard="' . $hazard[0]->slug . '">'; ?>
+				$hazard  = wp_get_post_terms( $single->ID, 'hazard'); ?>
+				<div class="nt-card <?php $hazard[0]->slug;?>" data-hazard="<?php $hazard[0]->slug;?>">
                 <div class="img-wrap"> 
                 	<?php echo get_the_post_thumbnail($single, 'archive'); ?>
                 <div class="nt-arrow"></div><img src="img/nt-holder.jpg" alt="" />
-                <?php echo '<span class="nt-category">' . $hazard[0]->name . '</span>';
+                <span class="nt-category"> <?php $hazard[0]->name; ?></span>
 
-                echo '</div>';
+                </div>
         		
-        		echo '<div class="nt-info"> 
-                    <h2 class="f3">';
-                echo get_the_title($single);
-                echo '<h3 class="f-small">The University of Iowa, Iowa City,  Johnson hazard, Iowa</h3>
-               		<p>';
-                the_excerpt();
-                echo '</p>
+        		<div class="nt-info"> 
+                    <h2 class="f3">
+                <?php echo get_the_title($single); ?>
+                <h3 class="f-small">The University of Iowa, Iowa City,  Johnson hazard, Iowa</h3>
+               		<p>
+                <?php the_excerpt();?>
+                </p>
                                         
-                    <a href="';
-                the_permalink($single);
-                echo '">Read Story &raquo;</a>
+                    <a href="<?php the_permalink($single); ?>">Read Story &raquo;</a>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
-		                    <span class="timeline-date">'. get_post_custom_values('Event Date', $single->ID)[0] . '</span>
+		                    <span class="timeline-date"><?php get_post_custom_values('Event Date', $single->ID)[0] ?></span>
 		                </div>
 	                
                  </div> <!-- end .nt-info -->                 
                                     
-              </div> <!-- end .nt-card -->';
-            }
+              </div> <!-- end .nt-card -->
+            <?php };?>
 
-             ?>
+             
 
             </div><!-- end .nt-stories -->
             <div id="no-results" class="nt-empty pa3">

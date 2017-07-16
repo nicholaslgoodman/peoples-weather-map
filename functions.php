@@ -154,7 +154,7 @@ function set_default_meta($post_ID){
 add_action('wp_insert_post','set_default_meta');
 
 /**
- * Enqueue Scripts
+ * Enqueue Scripts -- The version number should be changed to correspond to the date the script was last edited.
  */
 function pwm_scripts() {
 	wp_deregister_script( 'jquery' );
