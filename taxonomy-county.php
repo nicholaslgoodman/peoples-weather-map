@@ -81,10 +81,6 @@ get_header(); ?>
         	if ($lat==NULL) {
         		continue;
         	}
-			/*echo $lat;
-			echo "<br>";
-			echo $long;
-			echo "<br>";   */
 		}
        ?>
             <section class="nt-header">
@@ -104,57 +100,46 @@ get_header(); ?>
 
 		<?php
 
-		foreach (array_keys($all_posts) as $key ) {
-			echo '<li class="' . strtolower($key);
-            if ($key == 'All') { echo ' nt-active'; }
-            echo '"><a href="" data-toggle="' . strtolower($key) . '">' . $key . ' <span>';
-			//echo var_dump($all_posts[$hazard]);
-			echo $all_posts[$key]->post_count;
-			echo '</span></a></li>';
-		} ?>
+		foreach (array_keys($all_posts) as $key ) { ?>
+			<li class="<?php echo strtolower($key);
+            if ($key == 'All') { echo ' nt-active'; } ?>">
+            <a href="" data-toggle="<?php echo strtolower($key); ?>"><?php echo $key; ?><span>
+			<?php echo $all_posts[$key]->post_count; ?>
+			</span></a></li>
+		<?php } ?>
 		</ul>
 		<div class="nt-stories">
 		<?php
-		//array_splice($all_posts, 0, 1);
-		//print_r (array_keys($all_posts));
-	//	foreach ( array_keys($all_posts) as $key ) {
-//print_r (array_keys((array)$all_posts[$key]));
+
     		foreach ($all_posts['All']->posts as $single){
-				// setup_postdata($single);
-				$hazard  = wp_get_post_terms( $single->ID, 'hazard');
-				echo '<div class="nt-card ' . $hazard[0]->slug . '" data-hazard="' . $hazard[0]->slug . '">'; ?>
+				$hazard  = wp_get_post_terms( $single->ID, 'hazard'); ?>
+				<div class="nt-card <?php $hazard[0]->slug; ?>" data-hazard="<?php $hazard[0]->slug; ?>">
                 <div class="img-wrap"> 
                 	<?php echo get_the_post_thumbnail($single, 'archive'); ?>
                 <div class="nt-arrow"></div>
-                <?php echo '<span class="nt-category">' . $hazard[0]->name . '</span>';
-
-                echo '</div>';
-        		
-        		echo '<div class="nt-info"> 
-                    <h2 class="f3">';
-                echo get_the_title($single);
-                echo '</h2><h3 class="f-small">';
-                wpgeo_title($single);
-                echo '</h3>
-               		<p>';
-                the_excerpt();
-                echo '</p>
+                <span class="nt-category"> <?php $hazard[0]->name; ?></span>
+                </div>
+        		<div class="nt-info"> 
+                    <h2 class="f3">
+                <?php echo get_the_title($single); ?>
+                </h2><h3 class="f-small">
+                <?php wpgeo_title($single); ?>
+                </h3>
+               		<p>
+                <?php the_excerpt(); ?>
+                </p>
                                         
-                    <a href="';
-                the_permalink($single);
-                echo '" class="btn btn-primary">Read Story &raquo;</a>
+                    <a href="<?php the_permalink($single); ?>" class="btn btn-primary">Read Story &raquo;</a>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
-		                    <span class="timeline-date">'. get_post_custom_values('Event Date', $single->ID)[0] . '</span>
+		                    <span class="timeline-date"> <?php get_post_custom_values('Event Date', $single->ID)[0] ; ?></span>
 		                </div>
 	                
                  </div> <!-- end .nt-info -->                 
                                     
-              </div> <!-- end .nt-card -->';
-            }
-	//	}
-//get_the_date('Y',$single)
+              </div> <!-- end .nt-card -->
+            <?php }?>
              ?>
 
             </div><!-- end .nt-stories -->
