@@ -133,7 +133,7 @@ get_header(); ?>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
-		                    <span class="timeline-date"><?php get_post_custom_values('Event Date', $single->ID)[0] ?></span>
+		                    <span class="timeline-date"><?php echo get_post_custom_values('Event Date', $single->ID)[0] ?></span>
 		                </div>
 	                
                  </div> <!-- end .nt-info -->                 

@@ -96,17 +96,39 @@ get_header(); ?>
             <section class="nt-content">
                             
         		<ul class="nt-tabs">  
-
+                   
 		<?php
-
+        // tabs generation
 		foreach (array_keys($all_posts) as $key ) { ?>
 			<li class="<?php echo strtolower($key);
             if ($key == 'All') { echo ' nt-active'; } ?>">
             <a href="" data-toggle="<?php echo strtolower($key); ?>"><?php echo $key; ?><span>
 			<?php echo $all_posts[$key]->post_count; ?>
 			</span></a></li>
+
 		<?php } ?>
 		</ul>
+        <script>
+        // array post information objects (JSON) for modals        
+            var posts = [];
+        </script> 
+        <script>
+        <?php foreach ($all_posts['All']->posts as $single){
+            // parse JSON objects
+            $hazard  = wp_get_post_terms( $single->ID, 'hazard');
+            echo '            
+                posts.push (JSON.parse(\'{"id": "'.$single->post_name.'", "hazard": "'. strtolower($hazard[0]->name) .'",  "url" : "county/'. $term->slug.'/' .$single->post_name. '/" }\'));
+            ';
+        }?>
+
+        </script>
+        <!-- Testing JSON 
+        <p id="demo"></p>
+
+        <script>
+            document.getElementById("demo").innerHTML = posts[0].id + ", " + posts[0].hazard + ", " + posts[0].url;
+        </script> 
+        -->
 		<div class="nt-stories">
 		<?php
 
@@ -132,7 +154,7 @@ get_header(); ?>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
-		                    <span class="timeline-date"> <?php get_post_custom_values('Event Date', $single->ID)[0] ; ?></span>
+		                    <span class="timeline-date"> <?php echo get_post_custom_values('Event Date', $single->ID)[0] ; ?></span>
 		                </div>
 	                
                  </div> <!-- end .nt-info -->                 
