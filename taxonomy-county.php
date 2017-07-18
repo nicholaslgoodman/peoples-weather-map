@@ -96,7 +96,6 @@ get_header(); ?>
             <section class="nt-content">
                             
         		<ul class="nt-tabs">  
-        		
 
 		<?php
 
@@ -140,7 +139,7 @@ get_header(); ?>
                                     
               </div> <!-- end .nt-card -->
             <?php }?>
-             ?>
+             
 
             </div><!-- end .nt-stories -->
             <div id="no-results" class="nt-empty pa3">
@@ -155,8 +154,6 @@ get_header(); ?>
         </section><!-- end .nt-content -->
                     </div><!-- end .wrapper -->
                 </section><!-- end .narrative-track -->
-
-
     
         <section id="article-loader">
             <div id="al-top">
@@ -247,16 +244,10 @@ get_header(); ?>
                         }
                     });
                 }
-                
-                
-                
                 if (window.innerWidth >= 600) {
                      pullCards();
                 }
-                
             });
-            
-            
         });
     </script>
     

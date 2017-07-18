@@ -173,6 +173,25 @@ add_action( 'wp_enqueue_scripts', 'pwm_scripts' );
 // }
 // add_action( 'after_setup_theme', 'register_counties');
 
+/* 
+ * Register region terms for region taxonomies
+ */
+// function register_regions()
+// {
+// 	locate_template( array( 'regions.php' ), true, true );
+// }
+// add_action( 'after_setup_theme', 'register_regions');
+
+/* 
+ * Register hazard terms for hazard taxonomies
+ */
+// function register_hazards()
+// {
+// 	locate_template( array( 'hazards.php' ), true, true );
+// }
+// add_action( 'after_setup_theme', 'register_hazards');
+
+
 /**
  * Change excerpt length
  */

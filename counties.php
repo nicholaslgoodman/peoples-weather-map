@@ -1,7 +1,7 @@
 <?php
 /**
- * county term registration, also deletes current counties
- */
+ * county term registration
+ *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package pwmap
