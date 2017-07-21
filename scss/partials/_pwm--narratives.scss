@@ -426,3 +426,44 @@
         }
     }
 }
+
+.nt-header .f2 {
+    text-align: center;
+}
+
+#county-map {
+    width: 200px;
+    margin: 0 auto 1rem;
+    
+    .svg-map path {
+        fill: $tan_dark;
+        stroke-width: 2px;
+        stroke: $linework;
+    }
+    
+}
+
+#nt-map {
+    flex-wrap: wrap-reverse;
+    
+    > div {
+        width: 100%;
+    }
+}
+
+@media #{$breakpoint-lg} {
+    #county-map {
+        float: left;
+        margin: 0;
+        margin-bottom: 1rem;
+    }
+    .nt-header .f2 {
+        text-align: left;
+    }
+    #nt-map {
+        flex-wrap: nowrap;
+        > div {
+            width: auto;
+        }
+    }
+}

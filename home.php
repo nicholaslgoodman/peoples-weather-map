@@ -230,12 +230,15 @@
 
     <!-- map -->
     
+<!--
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
     <script src="https://d3js.org/d3-path.v1.min.js"></script>
     <script src="https://d3js.org/d3-shape.v1.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="http://d3js.org/queue.v1.min.js"></script>
+-->
+    <script src="<?php bloginfo('template_url');?>/js/d3-scripts-min.js"></script>
     
     <script>
      var stories = [
