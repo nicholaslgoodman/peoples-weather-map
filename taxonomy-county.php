@@ -14,6 +14,11 @@ get_header(); ?>
         <section class="narrative-track map-bg">
 
         <?php
+            
+            global $wp;
+            $current_url = home_url(add_query_arg(array(),$wp->request));
+
+            
 			//Display Title
 			$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 						
@@ -117,7 +122,7 @@ get_header(); ?>
             // parse JSON objects
             $hazard  = wp_get_post_terms( $single->ID, 'hazard');
             echo '            
-                posts.push (JSON.parse(\'{"id": "'.$single->post_name.'", "hazard": "'. strtolower($hazard[0]->name) .'",  "url" : "county/'. $term->slug.'/' .$single->post_name. '/" }\'));
+                posts.push (JSON.parse(\'{"id": "'.$single->post_name.'", "hazard": "'. strtolower($hazard[0]->name) .'",  "url" : "' .get_the_permalink($single->ID). '", "title": "'. $single->post_title .'" }\'));
             ';
         }?>
 
@@ -134,11 +139,11 @@ get_header(); ?>
 
     		foreach ($all_posts['All']->posts as $single){
 				$hazard  = wp_get_post_terms( $single->ID, 'hazard'); ?>
-				<div class="nt-card <?php $hazard[0]->slug; ?>" data-hazard="<?php $hazard[0]->slug; ?>">
+				<div id="<?php echo $single->post_name ?>" class="nt-card <?php echo $hazard[0]->slug; ?>" data-hazard="<?php echo $hazard[0]->slug; ?>">
                 <div class="img-wrap"> 
                 	<?php echo get_the_post_thumbnail($single, 'archive'); ?>
                 <div class="nt-arrow"></div>
-                <span class="nt-category"> <?php $hazard[0]->name; ?></span>
+                <span class="nt-category"> <?php echo $hazard[0]->name; ?></span>
                 </div>
         		<div class="nt-info"> 
                     <h2 class="f3">
@@ -180,215 +185,38 @@ get_header(); ?>
         <section id="article-loader">
             <div id="al-top">
                 <a class="close-x" href="#"><span></span></a>
-                <div class="social"></div>
+                <div class="social">
+                    <!-- based on https://simplesharebuttons.com/html-share-buttons/ -->
+                    <a id="s-facebook" href="http://www.facebook.com/sharer.php?u=<?php echo $current_url; ?>" target="_blank">
+                        <img src="<?php bloginfo('template_url');?>/img/social/Facebook.svg" alt="Facebook" />
+                    </a>
+                    <a id="s-twitter" href="https://twitter.com/share?url=<?php echo $current_url; ?>&amp;text=&amp;hashtags=" target="_blank">
+                        <img src="<?php bloginfo('template_url');?>/img/social/Twitter.svg" alt="Twitter" />
+                    </a>
+<!--
+                    <a id="s-pinterest" href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
+                        <img src="<?php bloginfo('template_url');?>/img/social/Pinterest.svg" alt="Pinterest" />
+                    </a>
+-->
+                    <a id="s-email" href="mailto:?Subject=Peoples%27 Weather Map&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 <?php echo $current_url; ?>">
+                        <img src="<?php bloginfo('template_url');?>/img/social/Email.svg" alt="Email" />
+                    </a>
+                </div><!-- end .social -->
             </div>
             <div id="al-overflow">
+                <div id="al-spinner"><div class="loader"></div></div>
                 <div id="al-article"></div>
                 <div id="al-bottom">
                     <a href="javascript:void(0);" class="x-text">Back to <?php echo $term->name; ?> County Page</a>
                     <div>
-                        <a href="" class="btn btn-reverse" id="al-hazard">Learn More About <?php echo $term->name; ?> &raquo;</a>
+                        <a href="" class="btn btn-reverse" id="al-hazard">Learn More About &raquo;</a>
                         <a href="" class="btn btn-primary ml2" id="al-next">Read Next Story In <?php echo $term->name; ?> County &raquo;</a>
                     </div>
                 </div>
             </div>
         </section><!-- end #article-loader -->
         
-    <script>
-        $(function(){
-            
-           /** pull stories up for layout **/
-            // cache nt cards
-            var $cards = $('.nt-card');
-            
-            
-            function pullCards(){
-                var visCards = $cards.filter(function(i,e){
-                    return $(e).is(':visible');
-                });
-                
-                var empty = $('#no-results');
-                
-                if (visCards.length == 0) {
-                    empty.show();
-                } else {
-                    empty.hide();            
-                     visCards.each(function(i,el){
-                        var that = $(this);
-                         that.removeClass('even').removeClass('odd');
-                        if (i!==0){
-                             var prev = $($cards[i-1]),
-                                 prevHeight = prev.height(),
-                                 pull = prevHeight/2;
-
-
-                            that.css('margin-top',-pull + 'px');
-
-                        } else {
-                            that.css('margin-top',0);
-                        }
-
-                        if (i%2 == 1) {
-                            that.addClass('even');
-                        }  else {
-                            that.addClass('odd')
-                        }
-
-
-                    }); //each
-                    
-                }
-            }
-            
-            if (window.innerWidth >= 600) {
-                 pullCards();
-            }
-           
-             /** tabs **/
-            var tabs = $('.nt-tabs li');
-            $('.nt-tabs a').on('click',function(e){
-                e.preventDefault();
-                var that = $(this),
-                    parent = that.parent(),
-                    hazard = that.data('toggle');
-                
-                tabs.removeClass('nt-active');
-                parent.addClass('nt-active');
-                
-                if (hazard == 'all') {
-                    $cards.show();
-                } else {
-                    $cards.each(function(){
-                        if (!$(this).hasClass(hazard)) {
-                            $(this).hide();
-                        } else {
-                            $(this).show();
-                        }
-                    });
-                }
-                if (window.innerWidth >= 600) {
-                     pullCards();
-                }
-            });
-        });
-    </script>
-    
-    <!-- this is to load the articles within this page's context -->
-    <script>
-        $(function(){
-            var $cards = $('.nt-card');
-            
-            $cards.find('.btn').on('click',function(e){
-                e.preventDefault();
-                $('#al-article').load($(this).attr('href') + ' #article');
-                $('#article-loader').show();
-            });
-            
-            var Stories = function(el,data){
-                var self = this;
-                
-                this.loader = $('#al-article');
-                this.overlay = $('#article-loader');
-                this.topDiv = $('#al-top');
-                this.close = this.topDiv.find('.close-x').add('.x-text');
-                this.hazardLink = $('#al-hazard');
-                this.nextLink = $('#al-next');
-                this.currentCard = null;
-                this.nextCard = null;
-                
-                this.setCards = function(){
-                    return $('.nt-card');
-                };
-                this.cards = this.setCards();
-                
-                this.setBtns = function(){
-                    return self.cards.find('.btn');
-                };
-                this.btns = this.setBtns();
-                
-                this.getVisibleCards = function(){
-                    return self.cards.filter(function(i,e){
-                        return $(e).is(':visible');
-                    });
-                }
-                
-                this.setHazardLink = function(btn){
-                    var hazard;
-                    if (btn.attr('id') == '#al-next') {
-                        hazard = self.nextCard.data('hazard');
-                    } else {
-                        hazard = self.currentCard.data('hazard');
-                    }
-                    self.hazardLink.attr('href','/' + hazard)
-                        .text('Learn More About ' + hazard);
-                };
-                
-                this.setNextLink = function(btn){
-                    // need to only get from visible cards
-                     var link = self.nextCard.find('.btn-primary');
-                    
-                    if (self.nextCard.length >= 1) {
-                        self.nextLink.show();
-                        self.nextLink.attr('href', link.attr('href'));
-                    } else {
-                        self.nextLink.hide();
-                    }
-                    
-                };
-                
-                this.addBtnEvents = function(){
-                    self.btns.on('click',function(e){
-                        e.preventDefault();
-                        self.loader.load($(this).attr('href') + ' #article');
-                        self.overlay.css('right',0);
-                        self.topDiv.css('right',0);
-                        self.currentCard = $(this).parent().parent(); 
-                        self.nextCard = self.currentCard.next('.nt-card');
-                        console.log(self.nextCard.find('h2').text());
-                        self.setHazardLink($(this));
-                        self.setNextLink($(this));
-                    });
-                };
-                
-                this.addNextBtnEvents = function(){
-                    self.nextLink.on('click',function(e){
-                        e.preventDefault();
-                        self.loader.load($(this).attr('href') + ' #article');
-                        self.loader.parent().scrollTop(0);
-                        self.setHazardLink($(this));
-                        
-                        self.currentCard = self.nextCard;
-                        self.nextCard = self.currentCard.next('.nt-card');
-                    
-                        console.log(self.nextCard.find('h2').text());
-                        
-                        // fix the url and history state
-                        
-                        // set hazard link (has to be different)
-
-                        // set next link (has to be different)
-                    });
-                };
-                
-                this.close.on('click',function(e){
-                    e.preventDefault();
-                    self.overlay.css('right','-100%');
-                    self.topDiv.css('right','-100%');
-                });
-                
-                this.init = function(){
-                    this.addBtnEvents();
-                    this.addNextBtnEvents();
-                }
-                this.init();
-                
-            }; // stories
-            
-            var pwmStories = new Stories();
-            
-        });
-    
-    </script>
+    <script src="<?php bloginfo('template_url'); ?>/js/narratives.js"></script>
     
 
 <?php

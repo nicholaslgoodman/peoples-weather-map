@@ -56,9 +56,6 @@
                 
             </svg>
             
-            <script>
-            var history = window.location.href;
-            </script>
 
             <span id="logo" class="img-replace"><img src="<?php bloginfo( 'template_url' ); ?>/img/andreas_logo.png" alt="Iowa Map" /></span>
             <h1 id="logotype" class="f-tan-light normal f-base-s f3-m f3-l serif">Peoples' Weather Map</h1>
