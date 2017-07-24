@@ -1,6 +1,8 @@
 jQuery( document ).ready( function( $ ) {
     
-   $('header .hamburger, nav .close-x').on('click',function(){
+   $('header .hamburger, nav .close-x').on('click',function(e){
+       e.preventDefault();
+       
         var that = $(this);
         var toggle = that.data('toggle');
        var active = that.data('active');

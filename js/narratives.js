@@ -130,7 +130,7 @@ $(function(){
                     return self.cards.find('.btn');
                 };
                 this.btns = this.setBtns();
-                
+                                
                 // tabs events
                 this.tabs = $('.nt-tabs a');
                 self.tabs.on('click',function(){
@@ -178,6 +178,7 @@ $(function(){
                     self.overlay.css('right',0);
                     self.topDiv.css('right',0);
                     self.loader.parent().scrollTop(0);
+                    
                 }
                 
                 // base URL of page
@@ -268,7 +269,7 @@ $(function(){
                         e.preventDefault();
                         
                         $('html').addClass('noscroll');
-                        
+                                                
                         // load article and show article view
                         self.loadArticle($(this).attr('href') + ' #article');
                         
@@ -295,7 +296,6 @@ $(function(){
                 this.addNextBtnEvents = function(){
                     self.nextLink.on('click',function(e){
                         e.preventDefault();
-                        
                         
                         self.currentArticle++;
 

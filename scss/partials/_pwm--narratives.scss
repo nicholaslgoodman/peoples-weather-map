@@ -437,8 +437,15 @@
     
     .svg-map path {
         fill: $tan_dark;
+        fill-opacity: .5;
         stroke-width: 2px;
         stroke: $linework;
+        stroke-opacity: .4;
+        
+        &.water {
+            fill-opacity:1;
+            stroke-opacity:1;
+        }
     }
     
 }

@@ -78,16 +78,6 @@ get_header(); ?>
 		);
 		?>
         <div class="wrapper">
-        <?php
-        foreach ($all_posts['All']->posts as $single){
-        	$ID = $single->ID;
-			$lat = get_wpgeo_latitude( $ID);
-			$long = get_wpgeo_longitude( $ID );
-        	if ($lat==NULL) {
-        		continue;
-        	}
-		}
-       ?>
             <section class="nt-header cf">
                
                 <div id="nt-map" class="media-obj">
@@ -96,6 +86,7 @@ get_header(); ?>
                     </div>
                     <div class="media-obj--body">
                         <h1 class="f2" style="padding-top:1rem;"><?php echo strtoupper($term->name) . ' COUNTY';?></h1>
+                        <div id="county-donut"></div>
                     </div>
                 </div>
                 
@@ -110,8 +101,11 @@ get_header(); ?>
 		<?php
         // tabs generation
 		foreach (array_keys($all_posts) as $key ) { ?>
-			<li class="<?php echo strtolower($key);
-            if ($key == 'All') { echo ' nt-active'; } ?>">
+			<li class="<?php echo strtolower($key); ?>
+            <?php if ($key == 'All') { echo ' nt-active'; } ?>
+            <?php if ($all_posts[$key]->post_count == 0) { echo ' nt-none';} ?>
+
+            ">
             <a href="" data-toggle="<?php echo strtolower($key); ?>"><?php echo $key; ?><span>
 			<?php echo $all_posts[$key]->post_count; ?>
 			</span></a></li>
@@ -125,8 +119,15 @@ get_header(); ?>
         <?php foreach ($all_posts['All']->posts as $single){
             // parse JSON objects
             $hazard  = wp_get_post_terms( $single->ID, 'hazard');
+    
+            $lat = get_wpgeo_latitude($single->ID);
+            if ($lat == '') {$lat = 0;}
+    
+            $lng = get_wpgeo_longitude($single->ID);
+            if ($lng == '') {$lng = 0;}
+    
             echo '            
-                posts.push (JSON.parse(\'{"id": "'.$single->post_name.'", "hazard": "'. strtolower($hazard[0]->name) .'",  "url" : "' .get_the_permalink($single->ID). '", "title": "'. $single->post_title .'" }\'));
+                posts.push (JSON.parse(\'{"id": "'.$single->post_name.'", "hazard": "'. strtolower($hazard[0]->name) .'",  "url" : "' .get_the_permalink($single->ID). '", "title": "'. $single->post_title .'","lat":'.$lat.',"lng":'.$lng.' }\'));
             ';
         }?>
 
@@ -888,7 +889,7 @@ get_header(); ?>
                 
                 
             };
-            
+                        
 
             
             
@@ -908,8 +909,7 @@ get_header(); ?>
                 self.mapG = this.svg.append('g').attr('id','iowa');
                 
                 self.wrapper.style('padding-top',(county.aspect * 100) + '%');
-                
-                
+                                
                 self.counties = self.mapG.selectAll(".county")
                     .data(self.countyObject)
                     .enter()
@@ -921,12 +921,188 @@ get_header(); ?>
                 
             };
             
+            this.drawWater = function(water) {
+                var lakes = topojson.feature(water,water.objects.iowa_lakes).features,
+                    co_lakes = [];
+                                                
+                for (i=0;i<lakes.length;i++) {
+                    if (lakes[i].properties.CO_NAME == self.county.toUpperCase().replace('-',' ')) {
+                        co_lakes.push(lakes[i]);
+                    }
+                }
+                
+                self.mapG.selectAll(".water")
+                    .data(co_lakes)
+                    .enter()
+                    .append('path')
+                    .attr("class","water")
+                    .attr("d",function(d){ return self.path(d)})
+                    .style('fill','#d2d8d6')
+                    .style('stroke','#d2d8d6');
+            };
+            
+            this.drawPostMarkers = function(posts) {
+                self.mapG.selectAll(".marker")
+                    .data(posts)
+                    .enter()
+                    .append('circle')
+                    .attr('r',3)
+                    .attr('cx', function(d){return self.projection([d.lng,d.lat])[0]})
+                    .attr('cy', function(d){return self.projection([d.lng,d.lat])[1]})
+                    .style('fill',function(d){return self.colors[d.hazard]});
+            };
+            
+            
+            this.drawDonut = function(posts) {
+                self.donut = d3.select('#county-donut');
+                
+                var p_hazards = {},
+                    p_haz_array = [],
+                    total = 0,
+                    temp;
+                
+                posts.map(function(p){
+                    if (!p_hazards[p.hazard]) {p_hazards[p.hazard] = 0}
+                   return p_hazards[p.hazard] += 1; 
+                });
+                
+                for (var h in p_hazards) {
+                    temp = {};
+                    temp.hazard = h;
+                    temp.count = p_hazards[h];
+                    p_haz_array.push(temp);
+                    total += p_hazards[h];
+                }
+                
+                
+                self.donutSVG = self.donut.append('svg')
+                    .attr('width','100px')
+                    .attr('height','100px');
+                
+                self.donutG = self.donutSVG.append('g')
+                    .attr('transform','translate(50,50)');
+                
+                
+                if (total > 0) {
+                
+                    var arcs = d3.pie()
+                        .value(function(d) { return d.count; })
+                        (p_haz_array);
+                    
+                    var path = d3.arc()
+                        .outerRadius(50)
+                        .innerRadius(30);
+                    
+                    
+                    var arc = self.donutG.selectAll(".arc")
+                        .data(arcs)
+                        .enter()
+                        .append("g")
+                        .attr("class", "arc");
+                                        
+                     arc.append("path")
+                          .attr("d", path)
+                          .styles({
+                                fill:function(d) {  return self.colors[d.data.hazard]; },
+                                stroke: 'none'
+                            });
+                    
+                    var circ = self.donutG.append('circle')
+                        .attrs({
+                            r: 30,
+                            cx : 0,
+                            cy : 0
+                        })
+                        .style('fill','white');
+
+                     var label = self.donutG.append('text').attr('text-anchor','middle')
+                        .text(total).attr('transform',"translate(0,10)").style('font-size','24px').style('font-weight','bold');
+                    
+                }
+                
+                
+//                if (total > 0) {
+//                         
+//                        
+//                    
+//                         var arcs = d3.pie()
+//                            .value(function(d) { return d.count; })
+//                            (d.hazards);
+//                         
+//                         var path = d3.arc()
+//                            .outerRadius(100)
+//                            .innerRadius(0);
+//                         
+//                         var data = {
+//                            county: d.properties.name.replace(', IA',''),
+//                            cx: d.cx,
+//                            cy: d.cy,
+//                            hazards: d.hazards,
+//                            countySafe : d.countySafe
+//                         };
+//                         
+//                         var pie = self.mapG.append('g').attr('transform',"translate(" + d.cx + "," + d.cy + ")")
+//                            .classed('pie',true)
+//                            .datum(data);
+//                         
+//                         var arc = pie.selectAll(".arc")
+//                            .data(arcs)
+//                            .enter()
+//                            .append("g")
+//                            .attr("class", "arc");
+//                                                  
+//                         arc.append("path")
+//                          .attr("d", path)
+//                          .styles({
+//                                fill:function(d) { return self.colors[d.data.hazard]; },
+//                                stroke: 'none'
+//                            });
+//                         
+//                         var circ = pie.append('circle')
+//                            .attrs({
+//                                r: self.storyCountScale(d.count) - 10,
+//                                cx : 0,
+//                                cy : 0
+//                            })
+//                            .style('fill','white');
+//                                                  
+//                         var label = pie.append('text').attr('text-anchor','middle')
+//                            .text(d.count).attr('transform',"translate(0,6)");
+//                         
+//                     } else {
+//                         
+//                         var data = {
+//                            county: d.properties.name.replace(', IA',''),
+//                            cx: d.cx,
+//                            cy: d.cy,
+//                            countySafe : d.countySafe
+//                         };
+//                         
+//                         var circ = self.mapG.append('circle')
+//                            .attrs({
+//                                r: 8,
+//                                cx : d.cx,
+//                                cy : d.cy
+//                            })
+//                            .style('fill','#efefef')
+//                            .classed('pie',true)
+//                            .datum(data);
+//                         
+//                     }   
+            };
+            
+            
+            
+            
             /******* DRAW ROUTINE ***************/
-            this.init = function(iowa){
+            this.init = function(iowa,water){
                 self.getCounty(iowa);
                 self.setCountyProjection();
                 self.drawCounties(iowa);
-                
+                self.drawWater(water);
+                self.drawPostMarkers(posts);
+                this.drawDonut(posts);
+                                
                 
 //                self.mergeStories();
 //                self.buildDonuts();
@@ -934,12 +1110,13 @@ get_header(); ?>
             }
         };
             
-        var countyMap = new CountyMap('#county-map','<?php echo $term->slug ?>');
+        var countyMap = new CountyMap('#county-map','<?php echo $term->slug ?>',posts);
                 
-        d3.queue(1)
+        d3.queue(2)
             .defer(d3.json, '<?php bloginfo( 'template_url' ); ?>/js/countiesTopo.json')
-                .await(function(err,data){
-                    countyMap.init(data)
+            .defer(d3.json, '<?php bloginfo( 'template_url' ); ?>/js/iowa_lakes.topo.json')
+                .await(function(err,data,water){
+                    countyMap.init(data,water)
                 });     
         
     </script>
