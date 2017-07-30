@@ -1098,7 +1098,10 @@ get_header(); ?>
                 self.drawCounties(iowa);
                 self.drawWater(water);
                 self.drawPostMarkers(posts);
-                this.drawDonut(posts);
+                if (window.innerWidth >= 900) {
+                    this.drawDonut(posts);
+                }
+                
                                 
                 
 //                self.mergeStories();

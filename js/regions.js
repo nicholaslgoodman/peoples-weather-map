@@ -1,0 +1,6 @@
+{
+    'northwest' : ['lyon','osceola','dickinson','emmet','kossuth','winnebago','hancock','palo-alto','clay','obrien','sioux','plymouth','cherokee','buena-vista','pocahontas','humboldt','wright','hamilton','webster','calhoun','sac','ida','woodbury'],
+    'northeast' : ['worth','mitchell','howard','winneshiek','allamakee','clayton','fayette','chickasaw','floyd','cerro-gordo','franklin','butler','bremer','dubuque','delaware','buchanan','black-hawk','grundy','hardin'],
+    'southeast' : ['marshall','tama','benton','linn','jones','jackson','clinton','scott','cedar','johnson','iowa','poweshiek','jasper','marion','mahaska','keokuk','washington','muscatine','louisa','des-moines','henry','lee','van-buren','jefferson','wapello','davis','monroe','appanoose'],
+    'southwest' : ['story','polk','warren','lucas','wayne','decatur','clarke','madison','dallas','boone','greene','guthrie','adair','union','ringgold','taylor','adams','cass','audubon','carroll','crawford','monona','harrison','pottawattamie','montgomery','mill','fremont','page']
+}
