@@ -8,76 +8,74 @@
  */
 
 get_header(); ?>
-
 	<main>  
-
         <section class="narrative-track map-bg">
+            <div class="wrapper">
+            <?php
+                
+                global $wp;
+                $current_url = home_url(add_query_arg(array(),$wp->request));
 
-        <?php
-            
-            global $wp;
-            $current_url = home_url(add_query_arg(array(),$wp->request));
+                
+    			//Display Title
+    			$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+    						
+    			//Display number of posts with taxonomy term
+    			function customQuery($hazard, $county) {
 
-            
-			//Display Title
-			$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-						
-			//Display number of posts with taxonomy term
-			function customQuery($hazard, $county) {
-
-			if ($hazard != 'all'){
-				$args = array(  
-					'post_type' => 'post',
-					'meta_key' => 'Event Date',
-                    'orderby' => 'meta_value_num',
-					'order'   => 'ASC',
-                    'tax_query' => array(
-                        'relation' => 'AND',
-                        array(
-                            'taxonomy' => 'hazard',
-                            'field'    => 'slug',
-                            'terms'    => $hazard,
+    			if ($hazard != 'all'){
+    				$args = array(  
+    					'post_type' => 'post',
+    					'meta_key' => 'Event Date',
+                        'orderby' => 'meta_value_num',
+    					'order'   => 'ASC',
+                        'tax_query' => array(
+                            'relation' => 'AND',
+                            array(
+                                'taxonomy' => 'hazard',
+                                'field'    => 'slug',
+                                'terms'    => $hazard,
+                            ),
+                            array(
+                                'taxonomy' => 'county',
+                                'field'    => 'slug',
+                                'terms'    => $county,
+                            ),
                         ),
-                        array(
-                            'taxonomy' => 'county',
-                            'field'    => 'slug',
-                            'terms'    => $county,
+                        );
+    				
+    			}
+    			else{
+    				$args = array(
+    					'post_type' => 'post',
+                        'meta_key' => 'Event Date',
+                        'orderby' => 'meta_value_num',
+    					'order'   => 'ASC',
+                        
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'county',
+                                'field'    => 'slug',
+                                'terms'    => $county,
+                            ),
                         ),
-                    ),
-                    );
-				
-			}
-			else{
-				$args = array(
-					'post_type' => 'post',
-                    'meta_key' => 'Event Date',
-                    'orderby' => 'meta_value_num',
-					'order'   => 'ASC',
-                    
-                    'tax_query' => array(
-                        array(
-                            'taxonomy' => 'county',
-                            'field'    => 'slug',
-                            'terms'    => $county,
-                        ),
-                    ),
-                    );
-				
-			}
+                        );
+    				
+    			}
 
-			return new WP_Query( $args);
-		}
-		$all_posts = array(
-		    'All' => customQuery('all', $term->slug)	,
-		    'Flood' => customQuery('flood', $term->slug),
-		    'Drought' => customQuery('drought', $term->slug),
-		    'Insects' => customQuery('insects', $term->slug),
-		    'Heat' => customQuery('heat', $term->slug),
-		    'Blizzard' => customQuery('blizzard', $term->slug),
-		    'Tornado' => customQuery('tornado', $term->slug)
-		);
-		?>
-        <div class="wrapper">
+    			return new WP_Query( $args);
+    		}
+    		$all_posts = array(
+    		    'All' => customQuery('all', $term->slug),
+    		    'Flood' => customQuery('flood', $term->slug),
+    		    'Drought' => customQuery('drought', $term->slug),
+    		    'Insects' => customQuery('insects', $term->slug),
+    		    'Heat' => customQuery('heat', $term->slug),
+    		    'Blizzard' => customQuery('blizzard', $term->slug),
+    		    'Tornado' => customQuery('tornado', $term->slug)
+    		);
+    		?>
+        
             <section class="nt-header cf">
                
                 <div id="nt-map" class="media-obj">
@@ -89,10 +87,7 @@ get_header(); ?>
                         <div id="county-donut"></div>
                     </div>
                 </div>
-                
-                
-                
-    			
+              	
             </section>
             <section class="nt-content">
                             
@@ -142,29 +137,32 @@ get_header(); ?>
                 <div class="img-wrap"> 
                 	<?php echo get_the_post_thumbnail($single, 'archive'); ?>
                 <div class="nt-arrow"></div>
-                <span class="nt-category"> <?php echo $hazard[0]->name; ?></span>
+                    <span class="nt-category"> <?php echo $hazard[0]->name; ?></span>
                 </div>
         		<div class="nt-info"> 
                     <h2 class="f3">
-                <?php echo get_the_title($single); ?>
-                </h2><h3 class="f-small">
-                <?php wpgeo_title($single); ?>
-                </h3>
+                        <?php echo get_the_title($single); ?>
+                    </h2>
+                    <h3 class="f-small">
+                        <?php wpgeo_title($single); ?>
+                    </h3>
                		<p>
-                <?php the_excerpt(); ?>
-                </p>
+                        <?php the_excerpt(); ?>
+                    </p>
                                         
                     <a href="<?php the_permalink($single); ?>" class="btn btn-primary">Read Story &raquo;</a>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
-		                    <span class="timeline-date"> <?php echo get_post_custom_values('Event Date', $single->ID)[0] ; ?></span>
+		                    <span class="timeline-date">
+                                <?php echo get_post_custom_values('Event Date', $single->ID)[0] ; ?>
+                            </span>
 		                </div>
 	                
                  </div> <!-- end .nt-info -->                 
                                     
               </div> <!-- end .nt-card -->
-            <?php }?>
+            <?php } ?>
              
 
             </div><!-- end .nt-stories -->
@@ -1091,8 +1089,7 @@ get_header(); ?>
 //                     }   
             };
             
-            
-            
+
             
             /******* DRAW ROUTINE ***************/
             this.init = function(iowa,water){
@@ -1123,4 +1120,4 @@ get_header(); ?>
     
 
 <?php
-get_footer();
+get_footer(); ?>

@@ -13,21 +13,16 @@ get_header(); ?>
         <section class="narrative-track map-bg">
         <div class="wrapper">
             
-            <section class="nt-header">
-               
-    			<h1 class="f2">
-					<?php
-					//Display Title
-						$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-						echo strtoupper($term->name) . ' REGION';
-					?>
-				</h1>
-            </section>
-            <section class="nt-content">
-                            
-        		<ul class="nt-tabs">  
+   
         		
  		<?php
+
+        global $wp;
+                $current_url = home_url(add_query_arg(array(),$wp->request));
+
+                
+                //Display Title
+                $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 			//Display number of posts with taxonomy term
 		function customQuery($hazard, $region) {
 
@@ -82,62 +77,73 @@ get_header(); ?>
 		    'Blizzard' => customQuery('blizzard', $term->slug),
 		    'Tornado' => customQuery('tornado', $term->slug)
 		);
-		//print_r( array_keys($all_posts));
-	//print_r (var_dump($all_posts['all']));
-			//Display number of posts with taxonomy term
-		// $hazards = array_keys($all_posts);	
+?>
+<section class="nt-header cf">
+               
+                <div id="nt-map" class="media-obj">
+                    <div class="media-obj--figure">
+                        <div id="county-map"></div>
+                    </div>
+                    <div class="media-obj--body">
+                        <h1 class="f2" style="padding-top:1rem;"><?php echo strtoupper($term->name) . ' REGION';?></h1>
+                        <div id="county-donut"></div>
+                    </div>
+                </div>
+                
+            </section>
+            <section class="nt-content">
+                            
+                <ul class="nt-tabs">  
+    <?php
+		      foreach (array_keys($all_posts) as $key ) { ?>
+            <li class="<?php echo strtolower($key); ?>
+            <?php if ($key == 'All') { echo ' nt-active'; } ?>
+            <?php if ($all_posts[$key]->post_count == 0) { echo ' nt-none';} ?>
 
-		foreach ( array_keys($all_posts) as $key ) {
-			echo '<li class="' . strtolower($key) . '"><a href="" data-toggle="' . strtolower($key) . '">' . $key . ' <span>';
-			//echo var_dump($all_posts[$hazard]);
-			echo $all_posts[$key]->post_count;
-			echo '</span></a></li>';
-		} ?>
-		</ul>
+            ">
+            <a href="" data-toggle="<?php echo strtolower($key); ?>"><?php echo $key; ?><span>
+            <?php echo $all_posts[$key]->post_count; ?>
+            </span></a></li>
+
+        <?php } ?>
+        </ul>
                 
 		<div class="nt-stories">
-		<?php
-		//array_splice($all_posts, 0, 1);
-		//print_r (array_keys($all_posts));
-	//	foreach ( array_keys($all_posts) as $key ) {
-//print_r (array_keys((array)$all_posts[$key]));
-    		foreach ($all_posts['All']->posts as $single){
-				setup_postdata($single);
-				$hazard  = wp_get_post_terms( $single->ID, 'hazard');
-				echo '<div class="nt-card ' . $hazard[0]->slug . '" data-hazard="' . $hazard[0]->slug . '">'; ?>
-                <div class="img-wrap"> 
-                	<?php echo get_the_post_thumbnail($single, 'archive'); ?>
-                <div class="nt-arrow"></div><img src="img/nt-holder.jpg" alt="" />
-                <?php echo '<span class="nt-category">' . $hazard[0]->name . '</span>';
+        <?php
 
-                echo '</div>';
-        		
-        		echo '<div class="nt-info"> 
-                    <h2 class="f3">';
-                echo get_the_title($single);
-                echo '</h2><h3 class="f-small">';
-                wpgeo_title($single);
-                echo '</h3>
-               		<p>';
-                the_excerpt();
-                echo '</p>
+            foreach ($all_posts['All']->posts as $single){
+                $hazard  = wp_get_post_terms( $single->ID, 'hazard'); ?>
+                <div id="<?php echo $single->post_name ?>" class="nt-card <?php echo $hazard[0]->slug; ?>" data-hazard="<?php echo $hazard[0]->slug; ?>">
+                <div class="img-wrap"> 
+                    <?php echo get_the_post_thumbnail($single, 'archive'); ?>
+                <div class="nt-arrow"></div>
+                    <span class="nt-category"> <?php echo $hazard[0]->name; ?></span>
+                </div>
+                <div class="nt-info"> 
+                    <h2 class="f3">
+                        <?php echo get_the_title($single); ?>
+                    </h2>
+                    <h3 class="f-small">
+                        <?php wpgeo_title($single); ?>
+                    </h3>
+                    <p>
+                        <?php the_excerpt(); ?>
+                    </p>
                                         
-                    <a href="';
-                the_permalink($single);
-                echo '" class="btn btn-primary">Read Story &raquo;</a>
+                    <a href="<?php the_permalink($single); ?>" class="btn btn-primary">Read Story &raquo;</a>
                 
-		                <div class="nt-timeline">
-		                    <span class="timeline-line"></span>
-		                    <span class="timeline-date">'. get_post_custom_values('Event Date', $single->ID)[0] . '</span>
-		                </div>
-	                
+                        <div class="nt-timeline">
+                            <span class="timeline-line"></span>
+                            <span class="timeline-date">
+                                <?php echo get_post_custom_values('Event Date', $single->ID)[0] ; ?>
+                            </span>
+                        </div>
+                    
                  </div> <!-- end .nt-info -->                 
                                     
-              </div> <!-- end .nt-card -->';
-            }
-	//	}
-//get_the_date('Y',$single)
-             ?>
+              </div> <!-- end .nt-card -->
+            <?php } ?>
+
 
             </div><!-- end .nt-stories -->
             <div id="no-results" class="nt-empty pa3">
@@ -145,8 +151,8 @@ get_header(); ?>
                 <p>We want to tell weather hazard stories of every region, but we need your help. Go to the <a href="get-involved">Get Involved</a> page to submit a newspaper clipping, photos, or historical documents that our storytellers can use to help tell this region’s story.</p>
                 <a href="get-involved" class="btn btn-primary">Find Out How To Get Involved &raquo;</a>
                 
-                <!--<h4 class="f5 mt4">Read Stories In This region</h4>
-                <a href="">Southeast</a>-->
+                <h4 class="f5 mt4">Read Stories In This region</h4>
+                <a href="">Southeast</a>
                 
             </div><!-- end .nt-empty -->
         </section><!-- end .nt-content -->
@@ -154,7 +160,6 @@ get_header(); ?>
                 </section><!-- end .narrative-track -->
 
 
-    
         <section id="article-loader">
             <div id="al-top">
                 <a class="close-x" href="#"><span></span></a>

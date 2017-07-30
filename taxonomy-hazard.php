@@ -123,25 +123,27 @@ get_header(); ?>
         		
         		<div class="nt-info"> 
                     <h2 class="f3">
-                <?php echo get_the_title($single); ?>
-                <h3 class="f-small">The University of Iowa, Iowa City,  Johnson hazard, Iowa</h3>
+                        <?php echo get_the_title($single); ?>
+                    </h2>
+                    <h3 class="f-small">The University of Iowa, Iowa City,  Johnson hazard, Iowa</h3>
                		<p>
-                <?php the_excerpt();?>
-                </p>
+                        <?php the_excerpt();?>
+                    </p>
                                         
                     <a href="<?php the_permalink($single); ?>">Read Story &raquo;</a>
                 
 		                <div class="nt-timeline">
 		                    <span class="timeline-line"></span>
-		                    <span class="timeline-date"><?php echo get_post_custom_values('Event Date', $single->ID)[0] ?></span>
+		                    <span class="timeline-date">
+                                <?php echo get_post_custom_values('Event Date', $single->ID)[0] ?>
+                            </span>
 		                </div>
 	                
                  </div> <!-- end .nt-info -->                 
                                     
               </div> <!-- end .nt-card -->
-            <?php };?>
-
-             
+            <?php } ?>
+   
 
             </div><!-- end .nt-stories -->
             <div id="no-results" class="nt-empty pa3">
@@ -178,5 +180,4 @@ get_header(); ?>
     
 
 <?php
-get_footer();
-?>
+get_footer(); ?>
