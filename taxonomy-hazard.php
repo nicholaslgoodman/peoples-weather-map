@@ -9,11 +9,9 @@
 
 get_header(); ?>
 	<main>  
-
         <section class="narrative-track map-bg">
-        <div class="wrapper">
-            
-            <section class="nt-header">
+            <div class="wrapper">
+              <section class="nt-header">
                
     			<h1 class="f2">
 					<?php
@@ -179,5 +177,4 @@ get_header(); ?>
 <script src="<?php bloginfo('template_url'); ?>/js/narratives.js"></script>
     
 
-<?php
-get_footer(); ?>
+<?php get_footer(); ?>
